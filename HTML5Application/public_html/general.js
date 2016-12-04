@@ -26,13 +26,10 @@ var CRUISER_LEN = 3;
 var SUBMARINE_LEN = 3;
 var DESTROYER_LEN = 2;
 function getRandFromArray(array) {
-
     var rand = array[Math.floor(Math.random() * array.length)];
     return rand;
 }
-
 function removeItemFromArray(array, value) {
-
     var index = array.indexOf(value);
     if (index > -1) {
         array.splice(index, 1);
