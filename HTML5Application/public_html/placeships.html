@@ -98,6 +98,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+       Double click the ship to rotate them before placing on the board.
 
     <div id="wrapper"></div>
     
@@ -115,6 +116,8 @@ and open the template in the editor.
     <div class="draggable mine3" id="mine3">
         <p>Mine3</p>
     </div>
+    
+    <button type="button" onclick="Sheild()">Use Shield?</button>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
@@ -171,6 +174,12 @@ and open the template in the editor.
             document.cookie = name+"="+value+expires+"; path=/";
     }
     
+    var subMoved = 0;
+    var desMoved = 0;
+    var batMoved = 0;
+    var cruMoved = 0;
+    var carMoved = 0;
+    
     var subRot = 0;
     var desRot = 0;
     var batRot = 0;
@@ -178,81 +187,104 @@ and open the template in the editor.
     var carRot = 0;
     
     $('#submarine').dblclick(function(){
-        $(this).toggleClass('rotated');
+        if  (subMoved == 0){
+            if (subRot == 0){
+                subRot = 1;
 
-        if (subRot == 0){
-            subRot = 1;
+                document.getElementById("submarine").style.height = "156px";
+                document.getElementById("submarine").style.width = "52px";
+                document.getElementById("submarine").style.background = image = "url('Submarine_rotated.png')";
+            }
+            else {
+                subRot = 0;
 
-            document.getElementById("submarine").style.height = "156px";
-            document.getElementById("submarine").style.width = "52px";
-        }
-        else {
-            subRot = 0;
+                document.getElementById("submarine").style.height = "52px";
+                document.getElementById("submarine").style.width = "156px";
 
-            document.getElementById("submarine").style.height = "52px";
-            document.getElementById("submarine").style.width = "156px";
+                document.getElementById("submarine").style.background = image = "url('Submarine.png')";
+            }
         }
     });
     
     $('#destroyer').dblclick(function(){
-        $(this).toggleClass('rotated');
-        if (desRot == 0){
-            desRot = 1;
+        if (desMoved == 0){
+            if (desRot == 0){
+                desRot = 1;
 
-            document.getElementById("destroyer").style.height = "104px";
-            document.getElementById("destroyer").style.width = "52px";
-        }
-        else {
-            desRot = 0;
+                document.getElementById("destroyer").style.height = "104px";
+                document.getElementById("destroyer").style.width = "52px";
 
-            document.getElementById("destroyer").style.height = "52px";
-            document.getElementById("destroyer").style.width = "104px";
+                document.getElementById("destroyer").style.background = image = "url('Destroyer_rotated.png')";
+            }
+            else {
+                desRot = 0;
+
+                document.getElementById("destroyer").style.height = "52px";
+                document.getElementById("destroyer").style.width = "104px";
+
+                document.getElementById("destroyer").style.background = image = "url('Destroyer.png')";
+            }
         }
     });
     
     $('#battleship').dblclick(function(){
-        $(this).toggleClass('rotated');
-        if (batRot == 0){
-            batRot = 1;
+        if (batMoved == 0){
+            if (batRot == 0){
+                batRot = 1;
 
-            document.getElementById("battleship").style.height = "208px";
-            document.getElementById("battleship").style.width = "52px";
-        }
-        else {
-            batRot = 0;
+                document.getElementById("battleship").style.height = "208px";
+                document.getElementById("battleship").style.width = "52px";
 
-            document.getElementById("battleship").style.height = "52px";
-            document.getElementById("battleship").style.width = "208px";
+                document.getElementById("battleship").style.background = image = "url('Battleship_rotated.png')";
+            }
+            else {
+                batRot = 0;
+
+                document.getElementById("battleship").style.height = "52px";
+                document.getElementById("battleship").style.width = "208px";
+
+                document.getElementById("battleship").style.background = image = "url('Battleship.png')";
+            }
         }
     });
     $('#cruiser').dblclick(function(){
-        $(this).toggleClass('rotated');
-        if (cruRot == 0){
-            cruRot = 1;
+        if (cruMoved == 0){
+            if (cruRot == 0){
+                cruRot = 1;
 
-            document.getElementById("cruiser").style.height = "156px";
-            document.getElementById("cruiser").style.width = "52px";
-        }
-        else {
-            cruRot = 0;
+                document.getElementById("cruiser").style.height = "156px";
+                document.getElementById("cruiser").style.width = "52px";
 
-            document.getElementById("cruiser").style.height = "52px";
-            document.getElementById("cruiser").style.width = "156px";
+                document.getElementById("cruiser").style.background = image = "url('Cruiser_rotated.png')";
+            }
+            else {
+                cruRot = 0;
+
+                document.getElementById("cruiser").style.height = "52px";
+                document.getElementById("cruiser").style.width = "156px";
+
+                document.getElementById("cruiser").style.background = image = "url('Cruiser.png')";
+            }
         }
     });
     $('#carrier').dblclick(function(){
-        $(this).toggleClass('rotated');
-        if (carRot == 0){
-            carRot = 1;
+        if (carMoved == 0){
+            if (carRot == 0){
+                carRot = 1;
 
-            document.getElementById("carrier").style.height = "260px";
-            document.getElementById("carrier").style.width = "52px";
-        }
-        else {
-            carRot = 0;
+                document.getElementById("carrier").style.height = "260px";
+                document.getElementById("carrier").style.width = "52px";
 
-            document.getElementById("carrier").style.height = "52px";
-            document.getElementById("carrier").style.width = "260px";
+                document.getElementById("carrier").style.background = image = "url('Carrier_rotated.png')";
+            }
+            else {
+                carRot = 0;
+
+                document.getElementById("carrier").style.height = "52px";
+                document.getElementById("carrier").style.width = "260px";
+
+                document.getElementById("carrier").style.background = image = "url('Carrier.png')";
+            }
         }
     });
     function getSettings() {
@@ -338,16 +370,36 @@ and open the template in the editor.
 
     function handleDrop( event, ui ) {
         console.log(ui.draggable.context.id);
-        if(ui.draggable.context.id == 'carrier'){
+        if(ui.draggable.context.id == 'carrier' && carRot == 0){
+            carMoved = 1;
             ui.draggable.position( { of: $(this), my: 'left-104 top', at: 'left top' } );
-        }else if (ui.draggable.context.id == 'battleship'){
+        }else if (ui.draggable.context.id == 'battleship' && batRot == 0){
+            batMoved = 1;
             ui.draggable.position( { of: $(this), my: 'left-104 top', at: 'left top' } );
-        }else if (ui.draggable.context.id == 'destroyer'){
+        }else if (ui.draggable.context.id == 'destroyer' && desRot == 0){
+            desMoved = 1;
             ui.draggable.position( { of: $(this), my: 'left-52 top', at: 'left top' } );
-        }else if (ui.draggable.context.id == 'cruiser'){
+        }else if (ui.draggable.context.id == 'cruiser' && cruRot == 0){
+            cruMoved = 1;
             ui.draggable.position( { of: $(this), my: 'left-52 top', at: 'left top' } );
-        }else if (ui.draggable.context.id == 'submarine'){
+        }else if (ui.draggable.context.id == 'submarine' && subRot == 0){
+            subMoved = 1;
             ui.draggable.position( { of: $(this), my: 'left-52 top', at: 'left top' } );
+        }else if(ui.draggable.context.id == 'carrier' && carRot == 1){
+            carMoved = 1;
+            ui.draggable.position( { of: $(this), my: 'left top-104', at: 'left top' } );
+        }else if (ui.draggable.context.id == 'battleship' && batRot == 0){
+            batMoved = 1;
+            ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
+        }else if (ui.draggable.context.id == 'destroyer' && desRot == 0){
+            desMoved = 1;
+            ui.draggable.position( { of: $(this), my: 'left top-52', at: 'left top' } );
+        }else if (ui.draggable.context.id == 'cruiser' && cruRot == 0){
+            cruMoved = 1;
+            ui.draggable.position( { of: $(this), my: 'left top-52', at: 'left top' } );
+        }else if (ui.draggable.context.id == 'submarine' && subRot == 0){
+            subMoved = 1;
+            ui.draggable.position( { of: $(this), my: 'left top-52', at: 'left top' } );
         }else {
             ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
         }
