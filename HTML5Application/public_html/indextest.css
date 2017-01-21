@@ -1,0 +1,292 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07-Dec-2016, 16:29:42
+    Author     : DABIODUN
+*/
+
+
+/* Layout */
+
+		/*Lewis' Notes
+		
+		Most changes have been in to columns, container, left and right with regards to float, width and padding
+		
+		The unit vw has been used to make font adjust with window size, not sure if you wanted that or not
+		The left and right panes now adjust to the window size though
+		
+		Be careful with elements that have attribute 'float:left/right' as they will sometimes ignore other properties you give them in CSS
+		
+		the aigameboard needs to be adjustable aswell I am assuming, but you will have to try these principles and adjust it
+		This wasn't actually appearing for me, I think there is a file missing or something
+		
+		Use the same principles I have used:
+		 width %
+		 font vw
+		 
+		Hope this has helped in some way
+		
+		*/
+		
+		body {
+			min-width: 630px;
+                        
+		}
+
+		#container { /* Container for the whole page. All elements are within it */
+			width: 100%
+		}
+		
+		#container .column {/* All three columns float to the left? */
+			position: relative;
+			float: left;
+		}
+		
+		#center { /* Middle column with main content (main id)*/
+
+			width: 70%;
+            text-align: center;
+		}
+		
+		#left { /* Left column (div id) */
+			width: 500px;
+			
+			right: 240px;
+			margin-left: -100%;
+            text-align: center;  
+		}
+		
+		#right { /* Right column (nav id)  */
+			width:30%;
+			
+			text-align: center;
+			font-size: 3vw;
+			line-height: 200%;
+		}
+		
+		
+		
+		/* IE hack */
+		* html #left {
+			left: 150px;
+		}
+
+		/* Make the columns the same height as each other */
+		#container {
+			overflow: hidden;
+		}
+
+		#container .column {
+			padding-bottom: 1001em;
+			margin-bottom: -1000em;
+		}
+
+		/* Aesthetics */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:Sans-serif;
+			line-height: 1.5em;
+		}
+                
+                h1{
+                     float: left;
+	             line-height: 40px;
+	             margin: 0;
+                     font-size: 3.3vw;
+                     font-family:'Helvetica', 'Arial', 'Sans-Serif';
+}
+                
+		
+		p {
+			color: #555;
+		}
+
+	
+
+                /* styling for header */
+		#header {
+			font-size: large;
+			background: #BCCE98;
+                        padding: 20px 40px;
+	                box-sizing:border-box;
+	                box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.15);
+	                height: 80px;
+                        text-align: center;
+	
+		}
+                
+		#left { /* styling for left column - players grid */
+			background: white;
+		}
+		
+                /* styling for right column  */
+		#right {
+			background: #DAE9BC;;
+		}
+                
+                
+                /* styling for middle  */
+		#center {
+			background: white;
+		}
+
+		#container .column {
+			padding-top: 1em;
+		}
+                
+                /* background color when you hover over the menu options */
+                 a:hover {
+                background-color:#86a3d5;
+                
+                }
+                 /* styling for pause button*/
+                a{
+                  border-style: double;
+                  text-decoration: none;  
+                  font-size: 70%;
+                  
+                }
+                
+                input[type=Submit] {
+                 font-family: "Roboto", sans-serif;
+                 text-transform: uppercase;
+                 background: #4CAF50;
+                 width: 50%;
+                 border: none;
+                 padding: 15px;
+                 color: white;
+                 font-size: 60%;
+                 font-weight: bold;
+                 cursor: pointer;
+                 border-radius: 10px;
+                 position: relative;
+                }
+                
+                /* styling container for the players grid */
+                 #gameboard {
+                 max-width: 300px;
+                 float:left;
+                 max-height: 300px;
+                 padding: 10px 50px;        
+                 background-color:white;
+                 margin-right: 40px;
+                 position: relative;
+                 border-radius: 1px;
+                 margin-top: 350px;
+                 
+                 transform: scale(1.3);         
+                 }
+                
+                 /* styling for the players grid */
+                 #gameboard div {
+                 display: inline-block;
+                 -webkit-box-sizing: border-box; /* Safari 3.0 - 5.0, Chrome 1 - 9, Android 2.1 - 3.x */
+                 -moz-box-sizing: border-box;    /* Firefox 1 - 28 */
+                 box-sizing: border-box;         /* Safari 5.1+, Chrome 10+, Firefox 29+, Opera 7+, IE 8+, Android 4.0+, iOS any */
+                 background: #f6f8f9; /* Old browsers */
+                 border: 1px solid blue;
+                 width:30px;
+                 height:30px;
+                 float: left;                 
+                 }
+                
+                
+                /* background colour while hovering over players grid */
+                 #gameboard :hover {
+                 background-color: #3333ff;
+                 }
+                 /* background colour when a ship is hit on players grid */
+                 .hit {
+                 background: red;
+                 }
+        
+                 /* styling for the computer grid */
+                 #aigameboard {         
+                 width:500px;
+                 height:500px;
+                 
+                 
+                 
+                 
+                 
+                 }
+                 #aigameboard div {
+                 display: inline-block;
+                 position:absolute;
+                 -webkit-box-sizing: border-box; /* Safari 3.0 - 5.0, Chrome 1 - 9, Android 2.1 - 3.x */
+                 -moz-box-sizing: border-box;    /* Firefox 1 - 28 */
+                 box-sizing: border-box;         /* Safari 5.1+, Chrome 10+, Firefox 29+, Opera 7+, IE 8+, Android 4.0+, iOS any */
+                 background: #f6f8f9; /* Old browsers */
+                 border: 1px solid black;
+                 width:50px;
+                 height:50px; 
+                 }
+                 #aigameboard :hover {
+                 background-color: #3333ff;
+                 }  
+
+                
+
+                    /* styling for pop up and overlay */
+                    
+             .overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: hidden;
+            opacity: 0;
+            }
+        .overlay:target {
+            visibility: visible;
+            opacity: 1;
+        }       
+                          
+            .popup {
+            margin: 70px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 70%;
+            position: relative;
+            transition: all 5s ease-in-out;
+        }
+
+         .popup h2 {
+            margin-top: 0;
+            color: #333;
+            font-family: Tahoma, Arial, sans-serif;
+            text-decoration: underline
+        }
+        .popup h3 {
+
+            color: #333;
+            font-family: Tahoma, Arial, sans-serif;
+            font-size: 300%
+        }
+        .popup .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 200ms;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+        }
+        .popup .close:hover {
+            color: #06D85F;
+        }
+        .popup .content {
+            max-height: 30%;
+            overflow: auto;
+        }
+        
+ 

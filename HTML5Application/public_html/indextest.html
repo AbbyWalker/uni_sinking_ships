@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Sinking Ships</title>
+	<link href="index.css" rel="stylesheet">
+        <audio id="audio1" autoplay onloadeddata="setHalfVolume()" loop>
+        <source src="background_music.mp3" type="audio/mpeg">
+         Your browser does not support the audio element.
+        </audio>
+		
+</head>
+
+<body>
+
+	<header id="header"><h1>Sinking Ships</h1></header>
+
+	<div id="container">
+
+	         <main id="center" class="column"> 
+                     <table id ="table1">
+                         <tr>
+                             <td><div id="gameboard"></div></td>
+                             <td><div id="aigameboard"></div></td>
+                         </tr>
+                     </table> 
+                     
+                     <table id ="table2"
+                         <tr>
+                             <td><div id="gameboard"></div> </td>
+                         </tr>
+                     </table>
+		 </main> 
+
+		<!---<div id="left" class="column">-->
+
+
+		<div id="right" class="column">
+                     <!--Instructions button -->
+                        <a href="#instructions">Instructions</a>
+                     <!--Pause button -->
+                        <a href="#pausegame">Pause Game</a>
+                      <!--Clock button -->
+			<p id="clock">00:00</p>
+                      <!--Scores button -->
+                        <p id="pscore"> Your Score: 0</p>
+                        <p id="cscore"> Computer's Score: 0</p>
+                      <!--Exit button -->
+                        <form action="welcome.html" method="get">
+                        <p><input type="Submit" value="Click to quit"/></p>
+                        </form>
+                        
+		</div>
+            
+            <!--Below outputs pause Pop-Up-->
+             <div id="pausegame" class="overlay">
+             <div id ="pause" class="popup">
+                <h3>Game Paused</h3>
+                <a class="close" href="#">&times;</a>
+             </div>
+             </div>
+            
+        <!--Below outputs instructions Pop-Up-->
+        <div id="instructions" class="overlay">
+            <div class="popup">
+                <h2>Instructions</h2>
+                <a class="close" href="#">&times;</a>
+                <div class="content">
+                    <p>Select squares on the opponent’s grid to try and sink their ship!!</p>
+                    <p>If the square turns red, then you have hit a ship. If it turns grey, then it’s a miss!!</p>
+                    <p>If you sink an opponent’s ship, your score will go up!!</p>
+                    <p>Sink all of the opponent’s ships to win!!</p>
+                </div>
+            </div>
+        </div>
+            
+        <script src="jquery-1.6.1.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="grid.js"></script>
+        <script type="text/javascript" src="ship.js"></script>
+        <script type="text/javascript" src="AI.js"></script>
+        <script type="text/javascript" src="player.js"></script>
+        <script type="text/javascript" src="general.js"></script>
+        <script type="text/javascript" src="mine.js"></script>
+        <script type="text/javascript" src="sinkingships.js"></script>
+
+</body>
+
+</html>
