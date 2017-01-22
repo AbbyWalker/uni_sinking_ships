@@ -139,6 +139,7 @@ function AIthinkAndMove() {
     }, 4300);
 
 }
+
 ;
 function restoreOnClick() {
 
