@@ -17,12 +17,6 @@ and open the template in the editor.
         }
         .cruiserAI {
         }
-        .mine1AI {
-        }
-        .mine2AI {
-        }
-        .mine3AI {
-        }
         .destroyer {
         }
         .carrier {
@@ -34,10 +28,13 @@ and open the template in the editor.
         .cruiser {
         }
         .mine1 {
+            background-image:url('Mine.png');
         }
         .mine2 {
+            background-image:url('Mine.png');
         }
         .mine3 {
+            background-image:url('Mine.png');
         }
 
         body {
@@ -125,28 +122,21 @@ and open the template in the editor.
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <body>
-
     <head>
-        <h1>Game Over</h1>
-        <script>
-            $(function(){
-                $('#button').click(function() {
-                    window.close();
-                    window.open('http://146.148.7.252:8880/welcome.html/'); 
-                });
-            });
-        </script>
+            <h1>Game Over</h1>
     </head>
-    
-    
-        
+    <body>
         <div id="gameboard"></div>
 
         <div id="aigameboard"></div>
-
         
+        
+        
+        
+        <form action="welcome.html" method="get">
+            <p><input type="Submit" value="Back to Home" style="height:50px; width:200px;"/></p>
+
+        </form>
         
     </body>
 </html>

@@ -28,8 +28,8 @@ var gameWon = false;
 setHalfVolume();
 
 startGame(xLength, yLength, difficulty, playerTurn);
-var aiScore = aiShipsAlive();
-var userScore = playerShipsAlive();
+var userScore = aiShipsAlive();
+var aiScore = playerShipsAlive();
 
 function startGame(xLength, yLength, difficulty, playerTurn) {
     //configures and starts the game
@@ -57,10 +57,8 @@ function startPlayerMove(target) {
   //player move logic.
     $('#aigameboard').children().off('click'); // deactivates grid buttons so player can only make a move when expected
 
-    player.makePlayerMove(target);
-    //console.log(player.extraShot);
-    //var userScore = playerShipsAlive();    
-    if (gameWon === true) {
+    player.makePlayerMove(target);  
+    if (gameWon == true) {
         endGame();
     }
     if (!debug && !AI.missNextGo && player.extraShot === 0)
@@ -80,7 +78,11 @@ function startPlayerMove(target) {
     }
     ;
     document.getElementById("pscore").innerHTML = "Your Score: " + aiShipsAlive();
-};
+    if(aiShipsAlive == 5){
+        gameWon = true;
+    }
+}
+;
 function makeAIMove() {
     
 //High level AI Move logic
@@ -95,9 +97,8 @@ function makeAIMove() {
     }
     aiShipsAlive();
     playerTurn = true;
-    var aiScore = aiShipsAlive();
 
-    if (gameWon === true) {
+    if (gameWon == true) {
         endGame();
     }
 //below segment decides whether to give AI another go or end
@@ -130,17 +131,9 @@ function makeAIMove() {
     }
     AI.aiScoreChange();
     document.getElementById("cscore").innerHTML = "Computer's Score: " + playerShipsAlive()
-}
-;
-function AIthinkAndMove() {
-
-//Uses timeouts to make the move wait until after the thinking has finished, and to wait for sound effects to happen.
-    setTimeout(function () {
-        AI.think();
-    }, 2000);
-    setTimeout(function () {
-        makeAIMove();
-    }, 4300);
+    if (playerShipsAlive() == 5){
+        gameWon = true;
+    }
 
 }
 ;
@@ -177,9 +170,9 @@ function aiShipsAlive() {
             deadAIShipCount--;
         }
     }
-    if (deadAIShipCount === AI.ship.length) {
-        gameWon = true
-    }
+    //if (deadAIShipCount == AI.ship.length) {
+      //  gameWon = true
+    //}
     return deadAIShipCount;
     
 }
@@ -205,7 +198,7 @@ function playerShipsAlive() {
         deadPlayerShipCount--;
     }
     if (deadPlayerShipCount === 0) {
-        gameWon = true;
+        //gameWon = true;
     }
     return deadPlayerShipCount;
 }
