@@ -195,7 +195,7 @@ AI.prototype = {
         if (lastX!= hitX && lastY != hitY) {
             // if the last go was a miss then it may need to start firing
             // at other end of ship
-            console.log("made it here");
+
             if (this.direction2 === "positive") {
                 this.direction2 = "negative";
             } else if(this.direction2 === "negative") {
@@ -336,7 +336,7 @@ AI.prototype = {
         if (lastX!== hitX && lastY !== hitY || this.numOfMisses>= 2) {
             // if the last go was a miss then it may need to start firing
             // at other end of ship
-            console.log("made it here2");
+
             if (this.direction2 === "positive") {
                 this.direction2 = "negative";
             } else if(this.direction2 === "negative") {
