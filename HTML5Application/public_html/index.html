@@ -28,7 +28,6 @@
             <li><a id = "turn"></a></li>
 
             <li><a href="#instructions">Instructions</a></li>
-            <li><a href="#pausegame">Pause Game</a></li>
             <li><a id="pscore"> Your Score: </a></li> 
             <li><a id="cscore"> Computer's Score: </a></li> 
             <li><form action="welcome.html" method="get">
@@ -46,6 +45,7 @@
           
           <div id="gameboard"></div>
           <div id="aigameboard"></div>
+
           
         <!--Below outputs instructions Pop-Up-->
         <div id="instructions" class="overlay">
@@ -73,10 +73,24 @@
         </div>
       </div>
         
+<!--Below outputs multi shot function-->
+        <div id = "multishot">
+       <button type="button" id="btnMultiShot">Fire Multi Shot</button>
+       <p>  This button allows you to shoot three times in a single go. 
+           <br> It can only be used once. </p>
+
+
+
+        </div>
+
+
+
+<!--Below outputs status message-->
         <div class="status">
             <h4 class="pbox" id="dialogBox">Make a Move</h4>
             <h5 class="aibox" id="aiDialogBox">Game Started</h5>
         </div>
+
  <!--Extras   
         <div id ="side">
         <h1 id = "turn"></h1>

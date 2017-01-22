@@ -83,7 +83,7 @@ font-size: large;
     width:100px;
     height:100px;
     float:left;
-    top:500px;
+    top:800px;
     margin-left: -750px;
     display: inline-block;
     border: 1px solid black;
@@ -94,7 +94,7 @@ font-size: large;
     width:100px;
     height:100px;
     float:right;
-    top:500px;
+    top:800px;
     margin-left: -250px;
     display: inline-block;
     border: 1px solid black;
@@ -143,6 +143,8 @@ font-size: large;
             float:left;
             z-index: -1;
             padding-right: 5em;
+            padding-left: 7em;
+
             
             
         }
@@ -249,41 +251,36 @@ font-size: large;
             max-height: 30%;
             overflow: auto;
         }
-        
-          /* styling for mobile devices */
+/* styling for multishot border */
+          #multishot{
+              
+              border: solid black;
+              width: 10%;
+              float: right;
+              padding: 7px;
+              margin-right: 10%;
+              
+          }
           
-        @media only screen  and (max-width: 768px) {
-  #header .container {
-    width: 100%;
-  }
-  #header h1 {
-    padding-left: 3%;
-  }
-  #nav {
-    width: 100%;
-    top: 60px;
-  }
-  #nav:before {
-    content: '\2630';
-    display: block;
-    position: absolute;
-    right: 3%;
-    top: -50px;
-    line-height: 40px;
-    font-size: 1.4em;
-    cursor: pointer;
-  }
-  #nav ul {
-    background: #222;
-    width: 100%;
-    margin: 0px;
-  }
-  #nav ul li {
-    float: none;
-  }
-  #nav ul li a {
-    padding: 10px 3%;
-    line-height: 20px;
-    border-top: 1px solid #333;
-  }
-}
+              /* styling for multishot button */
+          #multishot button{
+              width:100%;
+              height: 200%;
+              border-radius: 15px;
+              background-color: #4CAF50;
+              color: white;
+              position: relative;
+              padding: 10px 3px;
+              font-weight: bold;
+              font-family: helvetica, sans-serif;
+              font-size:16px;
+          }
+          
+        p {
+            font-weight: bold;
+            font-family: helvetica, sans-serif;
+          }
+
+/* styling for mobile devices */
+
+
