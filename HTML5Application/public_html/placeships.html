@@ -39,27 +39,27 @@ and open the template in the editor.
         .destroyer {
             height: 52px;
             width: 104px;
-            background-image:url('Destroyer.png');
+            background-image:url('media/Destroyer.png');
         }
         .carrier {
             height: 52px;
             width: 260px;
-            background-image:url('Carrier.png');
+            background-image:url('media/Carrier.png');
         }
         .submarine {
             height: 52px;
             width: 156px;
-            background-image:url('Submarine.png');
+            background-image:url('media/Submarine.png');
         }
         .battleship {
             height: 52px;
             width: 208px;
-            background-image:url('Battleship.png');
+            background-image:url('media/Battleship.png');
         }
         .cruiser {
             height: 52px;
             width: 156px;
-            background-image:url('Cruiser.png');
+            background-image:url('media/Cruiser.png');
         }
         .mine1 {
             width: 52px;
@@ -192,11 +192,17 @@ and open the template in the editor.
             else {
                 subRot = 0;
 
-                document.getElementById("submarine").style.height = "52px";
-                document.getElementById("submarine").style.width = "156px";
-
-                document.getElementById("submarine").style.background = image = "url('Submarine.png')";
+            document.getElementById("submarine").style.height = "156px";
+            document.getElementById("submarine").style.width = "52px";
+            document.getElementById("submarine").style.background = image = "url('media/Submarine_rotated.png')";
             }
+        } else {
+            subRot = 0;
+
+            document.getElementById("submarine").style.height = "52px";
+            document.getElementById("submarine").style.width = "156px";
+            
+            document.getElementById("submarine").style.background = image = "url('media/Submarine.png')";
         }
     });
     
@@ -205,19 +211,19 @@ and open the template in the editor.
             if (desRot == 0){
                 desRot = 1;
 
-                document.getElementById("destroyer").style.height = "104px";
-                document.getElementById("destroyer").style.width = "52px";
-
-                document.getElementById("destroyer").style.background = image = "url('Destroyer_rotated.png')";
+            document.getElementById("destroyer").style.height = "104px";
+            document.getElementById("destroyer").style.width = "52px";
+            
+            document.getElementById("destroyer").style.background = image = "url('media/Destroyer_rotated.png')";
             }
-            else {
-                desRot = 0;
+        }
+        else {
+            desRot = 0;
 
-                document.getElementById("destroyer").style.height = "52px";
-                document.getElementById("destroyer").style.width = "104px";
-
-                document.getElementById("destroyer").style.background = image = "url('Destroyer.png')";
-            }
+            document.getElementById("destroyer").style.height = "52px";
+            document.getElementById("destroyer").style.width = "104px";
+            
+            document.getElementById("destroyer").style.background = image = "url('media/Destroyer.png')";
         }
     });
     
@@ -228,17 +234,20 @@ and open the template in the editor.
 
                 document.getElementById("battleship").style.height = "208px";
                 document.getElementById("battleship").style.width = "52px";
+            
+                document.getElementById("battleship").style.background = image = "url('media/Battleship_rotated.png')";
+            } else {
+                batRot = 0;
 
                 document.getElementById("battleship").style.background = image = "url('Battleship_rotated.png')";
             }
-            else {
+        } else {
                 batRot = 0;
 
                 document.getElementById("battleship").style.height = "52px";
                 document.getElementById("battleship").style.width = "208px";
 
                 document.getElementById("battleship").style.background = image = "url('Battleship.png')";
-            }
         }
     });
     $('#cruiser').dblclick(function(){
@@ -246,8 +255,26 @@ and open the template in the editor.
             if (cruRot == 0){
                 cruRot = 1;
 
+
                 document.getElementById("cruiser").style.height = "156px";
                 document.getElementById("cruiser").style.width = "52px";
+
+                document.getElementById("cruiser").style.height = "156px";
+                document.getElementById("cruiser").style.width = "52px";
+            
+                document.getElementById("cruiser").style.background = image = "url('media/Cruiser_rotated.png')";
+            }
+        } else {
+            cruRot = 0;
+
+
+        }
+    });
+    $('#carrier').dblclick(function(){
+        if (carMoved == 0){
+            if (carRot == 0){
+                carRot = 1;
+
 
                 document.getElementById("cruiser").style.background = image = "url('Cruiser_rotated.png')";
             }
@@ -259,26 +286,13 @@ and open the template in the editor.
 
                 document.getElementById("cruiser").style.background = image = "url('Cruiser.png')";
             }
-        }
-    });
-    $('#carrier').dblclick(function(){
-        if (carMoved == 0){
-            if (carRot == 0){
-                carRot = 1;
 
-                document.getElementById("carrier").style.height = "260px";
-                document.getElementById("carrier").style.width = "52px";
+            document.getElementById("cruiser").style.height = "52px";
+            document.getElementById("cruiser").style.width = "156px";
+            
+            document.getElementById("cruiser").style.background = image = "url('media/Cruiser.png')";
 
-                document.getElementById("carrier").style.background = image = "url('Carrier_rotated.png')";
-            }
-            else {
-                carRot = 0;
 
-                document.getElementById("carrier").style.height = "52px";
-                document.getElementById("carrier").style.width = "260px";
-
-                document.getElementById("carrier").style.background = image = "url('Carrier.png')";
-            }
         }
     });
     function getSettings() {
@@ -421,3 +435,4 @@ and open the template in the editor.
     </script>
     </body>
 </html>
+

@@ -12,20 +12,18 @@ function getCookie(name) {
         var placeships = JSON.parse(shipsPos);
         
 
-function player(name, xSize, ySize) {
-    this.name = name;
+function player(xSize, ySize) {
     this.moveList = this.buildMoveList(xSize, ySize);
     this.grid = new Grid(xSize, ySize);
     this.hitPlayer = [];
     this.missedPlayer = [];
     this.missNextGo = false;
+    this.extraShot = 0;
 }
 
 player.prototype = {
     constructor: player,
-    getName: function () {
-        return this.name;
-    },
+    
     makePlayerMove: function (move) {
         var moveCoord = move.substring(2);
         var coord = moveCoord.split(',').map(Number);
@@ -37,6 +35,7 @@ player.prototype = {
 
     },
     buildMoveList: function (xSize, ySize) {
+        //move list used to control available shots
         var moveList = [];
         for (i = 0; i < ySize; i++) {
             for (j = 0; j < xSize; j++) {

@@ -29,6 +29,7 @@ function AI(xSize, ySize, difficulty) {
     this.currentScore = 0;
     this.lastTurnsNotEqual = 0;
     this.extraShotOption = 0;
+    this.numOfMisses = 0;
 
 }
 
@@ -185,11 +186,11 @@ AI.prototype = {
         console.log("direction: " + this.direction);
         console.log("direction2: "+ this.durection2);
         
-        if (this.direction2 !== null) {
+        if (this.direction2 !== null || this.numOfMisses > 1) {
             AI.smartMovePart2();
         }
         
-        if (lastX!= hitX && lastY != hitY) {
+        if (lastX!= hitX && lastY != hitY || this.numOfMisses > 1) {
             // if the last go was a miss then it may need to start firing
             // at other end of ship
             console.log("made it here");
@@ -313,7 +314,7 @@ AI.prototype = {
         var xTwo = moveTwo[0];
         var yTwo = moveTwo[1];
         
-        if (lastX!= hitX && lastY != hitY) {
+        if (lastX!= hitX && lastY != hitY || this.numOfMisses > 1) {
             // if the last go was a miss then it may need to start firing
             // at other end of ship
             console.log("made it here2");
@@ -360,8 +361,15 @@ AI.prototype = {
                         this.status = "hitNextSqaure";
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
-                        this.direction2 = null;
                         removeItemFromArray(this.moveList, remove);
+                        this.counter = 0;
+                        this.firstStep = [];
+                        this.secondStep = [];
+                        // Verticle or horizontal
+                        this.direction = null;
+                        // positive or negative
+                        this.direction2 = null;
+                        this.status = "none"; 
                     } else {
                         hitX = hitX + 1; 
                     }
@@ -395,6 +403,14 @@ AI.prototype = {
                         this.direction2 = null;
                         var remove = hitX + ',' + hitY;
                         removeItemFromArray(this.moveList, remove);
+                        this.counter = 0;
+                        this.firstStep = [];
+                        this.secondStep = [];
+                        // Verticle or horizontal
+                        this.direction = null;
+                        // positive or negative
+                        this.direction2 = null;
+                        this.status = "none"; 
                     } else {
                         hitX = hitX - 1; 
                     }
@@ -430,6 +446,14 @@ AI.prototype = {
                         var remove = hitX + ',' + hitY;
                         this.direction2 = null;
                         removeItemFromArray(this.moveList, remove);
+                        this.counter = 0;
+                        this.firstStep = [];
+                        this.secondStep = [];
+                        // Verticle or horizontal
+                        this.direction = null;
+                        // positive or negative
+                        this.direction2 = null;
+                        this.status = "none"; 
                     } else {
                         hitY = hitY + 1;                     
                     }
@@ -462,6 +486,14 @@ AI.prototype = {
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
                         removeItemFromArray(this.moveList, remove);
+                        this.counter = 0;
+                        this.firstStep = [];
+                        this.secondStep = [];
+                        // Verticle or horizontal
+                        this.direction = null;
+                        // positive or negative
+                        this.direction2 = null;
+                        this.status = "none"; 
                     } else {
                          hitY = hitY - 1;                         
                     }
@@ -772,7 +804,7 @@ AI.prototype = {
         this.lastHitTurn = [x,y];
         this.lastTurn = [x,y];
         this.hitLastTurn = 1;
-
+        this.numOfMisses = 0;
         
 
         if (this.counter === 1) {
@@ -803,6 +835,7 @@ AI.prototype = {
         document.getElementById(eleID).style.background = "grey";
         this.lastTurn = [x,y];
         this.hitLastTurn = 0;
+        this.numOfMisses = this.numOfMisses + 1;
 
     },
     hitMineDraw: function (x, y) {
