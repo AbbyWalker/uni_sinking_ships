@@ -76,6 +76,21 @@ font-size: large;
   font-size: 2vw;
   font-weight: bold;
 }
+/* Styling for the dialog boxes */
+.pbox{
+      width:100px;
+      height:100px;
+      border: 1px solid black;
+      background: #f0f8ff;
+      float: left;
+}
+.aibox{
+        width:100px;
+        height:100px;
+        border: 1px solid black;
+        background: #ffffff;
+        float: right;
+}
 /* Styling for navigation menus*/
 #nav {
   position: absolute;

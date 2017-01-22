@@ -54,22 +54,22 @@ Grid.prototype = {
             currentShip.shootShip(x, y);
             if (playerTurn === true) {
                 player.hitShipDraw(x, y);
-                $("#dialogueBox").text("You hit a ship");
+                $("#dialogBox").text("You hit a ship");
             }
             if (playerTurn === false) {
-                $("#aidialogueBox").text("AI hit a ship");
+                $("#aiDialogBox").text("AI hit a ship");
                 AI.hitShipDraw(x, y);
             }
 
         } else if (this.getGrid()[x][y] instanceof mine) {
             hitNoise.play();
             if (playerTurn === true) {
-                $("#dialogueBox").text("You hit a mine");
+                $("#dialogBox").text("You hit a mine");
                 player.missNextGo = true;
                 player.hitMineDraw(x, y);
             }
             if (playerTurn === false) {
-                $("#aidialogueBox").text("AI hit a mine");
+                $("#aiDialogBox").text("AI hit a mine");
                 AI.hitShipDraw(x, y);
                 AI.missNextGo = true;
                 AI.hitMineDraw(x, y);
@@ -79,11 +79,11 @@ Grid.prototype = {
             missNoise.play();
             if (playerTurn === true) {
                 player.missedShipDraw(x, y);
-                $("#dialogueBox").text("Player Missed");
+                $("#dialogBox").text("Player Missed");
             }
             if (playerTurn === false) {
                 AI.missedShipDraw(x, y);
-                $("#aidialogueBox").text("AI Missed");
+                $("#aiDialogBox").text("AI Missed");
             }
 
 
