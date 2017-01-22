@@ -28,13 +28,7 @@ body {
 			overflow: hidden;
 		}
 
-.content {
-  position: relative;
-  padding-top: 80px;
-}
-.content p {
-  margin-bottom: 10px;
-}
+
 
 /* background color when you hover over the menu options */
                  a:hover {
@@ -222,44 +216,18 @@ font-size: large;
             color: #06D85F;
         }
         .popup .content {
-            max-height: 30%;
+            max-height: 20%;
             overflow: auto;
         }
         
+        .content {
+        position: relative;
+        
+        }
+      .content p {
+      margin-bottom: 10px;
+       }
+        
           /* styling for mobile devices */
           
-        @media only screen  and (max-width: 768px) {
-  #header .container {
-    width: 100%;
-  }
-  #header h1 {
-    padding-left: 3%;
-  }
-  #nav {
-    width: 100%;
-    top: 60px;
-  }
-  #nav:before {
-    content: '\2630';
-    display: block;
-    position: absolute;
-    right: 3%;
-    top: -50px;
-    line-height: 40px;
-    font-size: 1.4em;
-    cursor: pointer;
-  }
-  #nav ul {
-    background: #222;
-    width: 100%;
-    margin: 0px;
-  }
-  #nav ul li {
-    float: none;
-  }
-  #nav ul li a {
-    padding: 10px 3%;
-    line-height: 20px;
-    border-top: 1px solid #333;
-  }
-}
+       
