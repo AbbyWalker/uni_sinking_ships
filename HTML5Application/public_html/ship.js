@@ -43,22 +43,20 @@ ship.prototype = {
     checkIsAlive: function () {
         numofhits = 0;
         for (var i = 0; i < this.getLocations().length; i++) {
-            if (this.getLocations()[i][2] == 1) {
+            if (this.getLocations()[i][2] === 1) {
                 numofhits++;
             }
         }
 
         if (numofhits < this.size) {
-            AI.sunkLastTurn = 0;
             return true;
         } else {
-            AI.sunkLastTurn = 1;
             return false;
         }
     },
     shootShip: function (x, y) {
         for (var i = 0; i < this.getLocations().length; i++) {
-            if (this.getLocations()[i][0] == x && this.getLocations()[i][1] == y) {
+            if (this.getLocations()[i][0] === x && this.getLocations()[i][1] === y) {
                 this.getLocations()[i][2] = 1;
             }
         }

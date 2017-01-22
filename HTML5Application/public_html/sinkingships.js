@@ -91,8 +91,6 @@ function makeAIMove() {
         AI.makeComputerMoveHard();
     }
 
-    //
-    //player.drawGrid();
     aiShipsAlive();
     playerTurn = true;
 
@@ -162,9 +160,6 @@ function aiShipsAlive() {
             deadAIShipCount--;
         }
     }
-    //if (deadAIShipCount == AI.ship.length) {
-      //  gameWon = true
-    //}
     return deadAIShipCount;
     
 }
@@ -187,8 +182,8 @@ function playerShipsAlive() {
     if (PlayerShip5.checkIsAlive()) {
         deadPlayerShipCount--;
     }
-    if (deadPlayerShipCount === 0) {
-        //gameWon = true;
+    if (deadPlayerShipCount == 0) {
+        gameWon = true;
     }
     return deadPlayerShipCount;
 }

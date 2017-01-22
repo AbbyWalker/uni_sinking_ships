@@ -17,11 +17,50 @@ function AI(xSize, ySize, difficulty) {
     this.hitAI = [];
     this.missedAI = [];
     this.missNextGo = false;
+    this.extraShot = 0;
+    this.counter = 0;
+    this.firstStep = [];
+    this.secondStep = [];
+    // Verticle or horizontal
+    this.direction = null;
+    // positive or negative
+    this.direction2 = null;
+    this.sunkLastTurn = 0;
+    this.currentScore = 0;
+    this.lastTurnsNotEqual = 0;
+    this.extraShotOption = 0;
+
 }
 
 AI.prototype = {
     constructor: AI,
+    aiScoreChange : function () {
+
+        if (this.currentScore<playerShipsAlive()) {
+            this.sunkLastTurn = 1;
+            this.counter = 0;
+            this.firstStep = [];
+            this.secondStep = [];
+            // Verticle or horizontal
+            this.direction = null;
+            // positive or negative
+            this.direction2 = null;
+            this.status = "none"; 
+            this.currentScore = playerShipsAlive();
+            
+
+        } else {
+            this.sunkLastTurn = 0;
+           // if (this.extraShotOption <2) {
+           //     console.log("extra shot for AI");
+           //     this.extraShot = 2;
+           //     this.extraShotOption = this.extraShotOption + 1;
+           // }
+        }
+        
+    },
     makeComputerMoveEasy: function () {
+
         var move = AI.getRandMove();
         var coord = move.split(',').map(Number);
         var x = coord[0];
@@ -30,23 +69,7 @@ AI.prototype = {
         removeItemFromArray(this.moveList, move);
     },
     makeComputerMoveMed: function () {
-    },
-    makeComputerMoveHard: function () {
-        // Ideal logic for AI:
-        // AI's first go is random
-        // Each go is random until it hits
-        // When it hits, it will try hit an adjacent square
-        // When it hits an adjacent square it will try hit the next one along
-        // If it misses it will try the opposite end of the row to check other
-        // direction
-        // Then it will try next one square along that row until sunk ship
-        // When sunk it goes back to a random go
 
-        // TO DO:
-        // Where hit all squares in ship, except one, it needs to follow ship
-        // direction to hit final one until "sunk"
-        
-        
         if (this.status === "none" ){
             // AI's first move so should be random
             this.status = "gameStarted";
@@ -70,9 +93,384 @@ AI.prototype = {
             AI.makeComputerMoveEasy();
         }
     },
+    makeComputerMoveHard: function () {
+
+        
+        // If the AI's last go was a hit + first hit for a ship
+        if (this.counter === 1){
+            
+            // try hit next square along
+            this.status = "hitNextSquare";
+            AI.hitNextSquare();
+        }
+                
+        
+        // If the AI has had two hits
+        else if (this.counter>1 && this.counter<3) {
+            // AI needs to work out the direction of the ship
+
+            // Take first hit and take x,y vals
+            var moveOne = this.firstStep;
+            var xOne = moveOne[0];
+            var yOne = moveOne[1];
+
+            // Take second hit and take x,y vals
+            var moveTwo = this.secondStep;
+            var xTwo = moveTwo[0];
+            var yTwo = moveTwo[1];
+
+            if (xOne === xTwo ){
+                // Same row therefore East/ West direction
+                this.direction = "verticle";
+                // go to AI.smartMove to continue turn
+                AI.smartMove();
+                
+            } else if (yOne === yTwo) {
+                // North/ South direction
+                this.direction = "horizontal";
+                // go to AI.smartMove to continue turn
+                AI.smartMove();
+            } else {
+                // ERROR
+                window.alert("Error: AI doesn't recognise direction");
+            }
+        
+        }
+        
+        // If the AI has had more than two hits against one ship
+        else if(this.counter>2 ) {
+            // go to AI.smartMove
+           AI.smartMove(); 
+            
+        // If AI had no hits and first turn
+        } else if (this.status === "none" ){
+            // AI's first move so should be random    
+            this.status = "gameStarted";
+            // Make a random move
+            AI.makeComputerMoveEasy();
+            
+        } else {
+            // AI hasn't hit, random move needed
+            AI.makeComputerMoveEasy();
+        }
+       
+        
+    },
+    smartMove: function() {
+        // x, y vals of last move which was a hit
+        var hitMove = this.lastHitTurn;
+        var hitX = hitMove[0];
+        var hitY = hitMove[1];
+
+        // x, y vals of last move
+        var lastMove = this.lastTurn;
+        var lastX = lastMove[0];
+        var lastY = lastMove[1];
+            
+        // Take first hit and take x,y vals
+        var moveOne = this.firstStep;
+        var xOne = moveOne[0];
+        var yOne = moveOne[1];
+            
+        // Take second hit and take x,y vals
+        var moveTwo = this.secondStep;
+        var xTwo = moveTwo[0];
+        var yTwo = moveTwo[1];
+            
+        console.log("In smartMove");
+        console.log("moveOne: " +moveOne);
+        console.log("moveTwo: " +moveTwo);
+        console.log("hitMove: "+ hitMove);
+        console.log("lastMove: " + lastMove);
+        console.log("direction: " + this.direction);
+        console.log("direction2: "+ this.durection2);
+        
+        if (this.direction2 !== null) {
+            AI.smartMovePart2();
+        }
+        
+        if (lastX!= hitX && lastY != hitY) {
+            // if the last go was a miss then it may need to start firing
+            // at other end of ship
+            console.log("made it here");
+            if (this.direction2 === "positive") {
+                this.direction2 = "negative";
+            } else if(this.direction2 === "negative") {
+                this.direction2 = "positive";
+            } else {
+               this.direction2 = null; 
+            }
+            
+        }
+            
+        // Calculating if direction2 is negative or positive
+        if (lastX===hitX && lastY === hitY){
+            this.lastTurnsNotEqual = 0;
+
+                        
+            if (yOne>yTwo) {
+                // positve
+                if (hitX>(xLength-1) ||  hitY>(yLength-1)   || hitX<0 || hitY<0) {
+                    // validating position is not off board, if so will need to
+                    // go back in opposite direction
+                this.direction2 = "positive";
+                } else {
+                    this.direction2 = "negative";
+                }
+                
+            } else if (yOne<yTwo){
+                // minus
+                if (hitX>(xLength-1) ||  hitY>(yLength-1)  || hitX<0 || hitY<0 ) {
+                    // validating position is not off board, if so will need to
+                    // go back in opposite direction
+                    this.direction2 = "negative";
+                } else {
+                   this.direction2 = "positive"; 
+                }
+                
+            } else if (xOne>xTwo) {
+                // positve
+                if (hitX>(xLength-1) ||  hitY>(yLength-1)  || hitX<0 || hitY<0 ) {
+                    // validating position is not off board, if so will need to
+                    // go back in opposite direction
+                    this.direction2 = "positive";
+                } else {
+                    this.direction2 = "negative";
+                }
+            } else if (xOne<xTwo){
+                // minus
+                if (hitX>(xLength-1) ||  hitY>(yLength-1)  || hitX<0 || hitY<0 ) {
+                    // validating position is not off board, if so will need to
+                    // go back in opposite direction
+                    this.direction2 = "negative";
+                } else {
+                    this.direction2 = "positive";
+                }
+            }
+            
+        
+       // } else if (this.direction2 === "positive") {
+       //    this.direction2 = "negative";
+       // } else if(this.direction2 === "negative") {
+       //    this.direction2 = "positive";
+        } else if (this.direction2 === null) {
+
+            if (yOne>yTwo) {
+                // negative
+                if (hitX>(xLength-1) ||  hitY>(yLength-1)  || hitX<0 || hitY<0 ) {
+                    // validating position is not off board, if so will need to
+                    // go back in opposite direction
+                    this.direction2 = "positive";
+                } else {
+                    this.direction2 = "negative"; 
+                }
+                    
+            } else if (yOne<yTwo){
+                // negative
+                if (hitX>(xLength-1) ||  hitY>(yLength-1) || hitX<0 || hitY<0 ) {
+                    this.direction2 = "positive";
+                } else {
+                    this.direction2 = "negative";
+                }
+           } else if (xOne>xTwo) {
+                // negative
+                if (hitX>(xLength-1) ||  hitY>(yLength-1)  || hitX<0 || hitY<0) {
+                    this.direction2 = "positive";
+                } else {
+                    this.direction2 = "negative";
+                }
+            } else if (xOne<xTwo){
+                if (hitX>(xLength-1) ||  hitY>(yLength-1) || hitX<0 || hitY<0 ) {
+                    this.direction2 = "negative";
+                } else {
+                // positive
+                    this.direction2 = "positive";
+                }
+            } 
+        }
+        console.log("Did the direction2 set: " + this.direction2);
+        AI.smartMovePart2();
+    },
+
+    smartMovePart2: function() {
+        // x, y vals of last move which was a hit
+        var hitMove = this.lastHitTurn;
+        var hitX = hitMove[0];
+        var hitY = hitMove[1];
+
+        // x, y vals of last move
+        var lastMove = this.lastTurn;
+        var lastX = lastMove[0];
+        var lastY = lastMove[1];
+            
+        // Take first hit and take x,y vals
+        var moveOne = this.firstStep;
+        var xOne = moveOne[0];
+        var yOne = moveOne[1];
+            
+        // Take second hit and take x,y vals
+        var moveTwo = this.secondStep;
+        var xTwo = moveTwo[0];
+        var yTwo = moveTwo[1];
+        
+        if (lastX!= hitX && lastY != hitY) {
+            // if the last go was a miss then it may need to start firing
+            // at other end of ship
+            console.log("made it here2");
+            if (this.direction2 === "positive") {
+                this.direction2 = "negative";
+            } else if(this.direction2 === "negative") {
+                this.direction2 = "positive";
+            } 
+        }
+        
+        // var coord with be location to move too
+        var coord = hitX + "," + hitY; 
+        // keepLooking is a variable to keep looping through below to look for 
+        // a new move
+        var keepLooking = 2;
+            
+        console.log("start of part 2, direction2: " + this.direction2);
+        // Find if hit ship are to left or right of last go
+        if (this.direction === "horizontal"){
+            if(this.direction2 === "positive"){
+                // find next positive move which is in moveList
+                while (keepLooking === 2) {
+                    // look at next coord and see if in moveList
+                    coord = hitX + "," + hitY;
+                    if (hitX>(xLength-1) ||  hitY>(yLength-1)  || hitX<0 || hitY<0) {
+                        if (this.direction2 === "positive") {
+                            this.direction2 = "negative";
+                            console.log("direction2 should be opp: " + this.direction2);
+                            console.log("HAD TO COMPLETE RESET DIRECTION2");
+                            AI.smartMovePart2();
+                        } else if(this.direction2 === "negative") {
+                            this.direction2 = "positive";
+                            console.log("direction2 should be opp: " + this.direction2);
+                            console.log("HAD TO COMPLETE RESET DIRECTION2");
+                            AI.smartMovePart2();
+                        }
+                    }
+                    if (this.moveList.includes(coord)) {
+                        // Found a move to try, break loop by 
+                        keepLooking = 1;
+                        // make move:
+                        // validation of board size
+
+                        this.status = "hitNextSqaure";
+                        player.grid.fireAtLocation(hitX, hitY, false);
+                        var remove = hitX + ',' + hitY;
+                        this.direction2 = null;
+                        removeItemFromArray(this.moveList, remove);
+                    } else {
+                        hitX = hitX + 1; 
+                    }
+                }
+                                       
+                                       
+            } else if (this.direction2 === "negative"){
+                // find next negative move which is in moveList
+                while (keepLooking === 2) {
+                    // look at next coord and see if in moveList
+                    coord = hitX + "," + hitY;
+                    if (hitX>(xLength-1) ||  hitY>(yLength-1) || hitX<0 || hitY<0) {
+                        if (this.direction2 === "positive") {
+                            this.direction2 = "negative";
+                            console.log("direction2 should be opp: " + this.direction2);
+                            console.log("HAD TO COMPLETE RESET DIRECTION2");
+                            AI.smartMovePart2();
+                        } else if (this.direction2 === "negative") {
+                            this.direction2 = "positive";
+                            console.log("direction2 should be opp: " + this.direction2);
+                            console.log("HAD TO COMPLETE RESET DIRECTION2");
+                            AI.smartMovePart2();
+                        }
+                    }
+                    if (this.moveList.includes(coord)) {
+                        // Found a move to try, break loop 
+                        keepLooking = 1;
+                        // make move:
+                        this.status = "hitNextSqaure";
+                        player.grid.fireAtLocation(hitX, hitY, false);
+                        this.direction2 = null;
+                        var remove = hitX + ',' + hitY;
+                        removeItemFromArray(this.moveList, remove);
+                    } else {
+                        hitX = hitX - 1; 
+                    }
+                }
+            } 
+
+
+
+        } else if (this.direction === "verticle"){ 
+            if(this.direction2 === "positive"){
+                while (keepLooking === 2) {
+                    // look at next coord and see if in moveList
+                    coord = hitX + "," + hitY;
+                    if (hitX>(xLength-1) || hitY>(yLength-1)  || hitX<0 || hitY<0 ) {
+                        if (this.direction2 === "positive") {
+                            this.direction2 = "negative";
+                            console.log("direction2 should be opp: " + this.direction2);
+                            console.log("HAD TO COMPLETE RESET DIRECTION2");
+                            AI.smartMovePart2();
+                        } else if(this.direction2 === "negative") {
+                            this.direction2 = "positive";
+                            console.log("direction2 should be opp: " + this.direction2);
+                            console.log("HAD TO COMPLETE RESET DIRECTION2");
+                            AI.smartMovePart2();
+                        }
+                    }
+                    if (this.moveList.includes(coord)) {
+                        // Found a move to try, break loop 
+                        keepLooking = 1;
+                        // make move:
+                        this.status = "hitNextSqaure";
+                        player.grid.fireAtLocation(hitX, hitY, false);
+                        var remove = hitX + ',' + hitY;
+                        this.direction2 = null;
+                        removeItemFromArray(this.moveList, remove);
+                    } else {
+                        hitY = hitY + 1;                     
+                    }
+                }
+                    
+                    
+                    
+            } else if (this.direction2 === "negative"){
+                while (keepLooking === 2) {
+                    // look at next coord and see if in moveList
+                    coord = hitX + "," + hitY;
+                    if (hitX>(xLength-1) ||  hitY>(yLength-1) || hitX<0 || hitY<0) {
+                        if (this.direction2 === "positive") {
+                            this.direction2 = "negative";
+                            console.log("direction2 should be opp: " + this.direction2);
+                            console.log("HAD TO COMPLETE RESET DIRECTION2");
+                            AI.smartMovePart2();
+                        } else if(this.direction2 === "negative") {
+                            this.direction2 = "positive";
+                            console.log("direction2 should be opp: " + this.direction2);
+                            console.log("HAD TO COMPLETE RESET DIRECTION2");
+                            AI.smartMovePart2();
+                        }
+                    }
+                    if (this.moveList.includes(coord)) {
+                        // Found a move to try, break loop 
+                        keepLooking = 1;
+                        // make move:
+                        this.status = "hitNextSqaure";
+                        player.grid.fireAtLocation(hitX, hitY, false);
+                        var remove = hitX + ',' + hitY;
+                        removeItemFromArray(this.moveList, remove);
+                    } else {
+                         hitY = hitY - 1;                         
+                    }
+                } 
+            } 
+        }       
+    },
 
     hitNextSquare: function () { 
-        console.log("AI in the hitNextSquare function");
        // list of adjacent squares to last move
        // clear status
         this.status = "gameStarted";
@@ -97,6 +495,10 @@ AI.prototype = {
         if (alreadyHitX > x) {
             //  it's row below, same y val
             // fire at (x+1, y);
+            if (alreadyHitX>(xLength-1) ||  alreadyHitY>(yLength-1) ) {
+               this.status = "hitAdjSquare"; 
+               AI.hitAdjSquare();
+            }
             player.grid.fireAtLocation(alreadyHitX, alreadyHitY, false);
             var remove = alreadyHitX + ',' + alreadyHitY;
             removeItemFromArray(this.moveList, remove);
@@ -110,6 +512,10 @@ AI.prototype = {
         } else if (alreadyHitX < x) {
             //  it's row above above, same y val
             // fire at (x-1, y);
+            if (alreadyHitX>(xLength-1) ||  alreadyHitY>(yLength-1) ) {
+               this.status = "hitAdjSquare"; 
+               AI.hitAdjSquare();
+            }
             player.grid.fireAtLocation(alreadyHitX, alreadyHitY, false);
             var remove = alreadyHitX + ',' + alreadyHitY;
             removeItemFromArray(this.moveList, remove);
@@ -123,7 +529,12 @@ AI.prototype = {
             //  same row
             if (alreadyHitY > y) {
                 //      it's to the right
-                // fire at (x, y+1);
+                // fire at (x, y+1);            
+                if (alreadyHitX>(xLength-1) ||  alreadyHitY>(yLength-1) ) {
+                    this.status = "hitAdjSquare"; 
+                    AI.hitAdjSquare();
+                }
+                
                 player.grid.fireAtLocation(alreadyHitX, alreadyHitY, false);
                 var remove = alreadyHitX + ',' + alreadyHitY;
                 removeItemFromArray(this.moveList, remove);
@@ -135,6 +546,10 @@ AI.prototype = {
             } else if (alreadyHitY < y) {
                 //      it's to the left
                 // fire at (x, y-1);
+                if (alreadyHitX>(xLength-1) ||  alreadyHitY>(yLength-1) ) {
+                    this.status = "hitAdjSquare"; 
+                    AI.hitAdjSquare();
+                }
                 player.grid.fireAtLocation(alreadyHitX, alreadyHitY, false);
                 var remove = alreadyHitX + ',' + alreadyHitY;
                 removeItemFromArray(this.moveList, remove);
@@ -151,7 +566,6 @@ AI.prototype = {
     },
    
     hitOppEndRow: function() {
-        console.log("AI in the hitOppEndRow function");
         // clear status
         this.status = "gameStarted";
         // this function is to hit opposite side of row where there has been a miss
@@ -167,6 +581,10 @@ AI.prototype = {
             // fire at x, y+1
             var coord1 = x + "," + y+1;
             if (this.moveList.includes(coord1)) {
+                if (hitX>(xLength-1) ||  hitY>(yLength-1) ) {
+                    this.status = "hitAdjSquare"; 
+                    AI.hitAdjSquare();
+                }
                 player.grid.fireAtLocation(x, y+1, false);
                 var remove = x + ',' + y+1;
                 removeItemFromArray(this.moveList, remove);
@@ -180,6 +598,10 @@ AI.prototype = {
                 // fire at x, y-1
             var coord1 = x + "," + y-1;
             if (this.moveList.includes(coord1)) {
+                if (hitX>(xLength-1) ||  hitY>(yLength-1) ) {
+                    this.status = "hitAdjSquare"; 
+                    AI.hitAdjSquare();
+                }
                 player.grid.fireAtLocation(x, y-1, false);
                 var remove = x + ',' + y-1;
                 removeItemFromArray(this.moveList, remove);
@@ -194,6 +616,10 @@ AI.prototype = {
             // fire at x+1, y
             var coord1 = x+1 + "," + y;
             if (this.moveList.includes(coord1)) {
+                if (hitX>(xLength-1) ||  hitY>(yLength-1) ) {
+                    this.status = "hitAdjSquare"; 
+                    AI.hitAdjSquare();
+                }
                 player.grid.fireAtLocation(x+1, y, false); 
                 var remove = x+1 + ',' + y;
                 removeItemFromArray(this.moveList, remove);
@@ -208,6 +634,10 @@ AI.prototype = {
             // fire at x-1, y
             var coord1 = x-1 + "," +y;
             if (this.moveList.includes(coord1)) {
+                if (hitX>(xLength-1) ||  hitY>(yLength-1) ) {
+                    this.status = "hitAdjSquare"; 
+                    AI.hitAdjSquare();
+                }
                 player.grid.fireAtLocation(x-1, y, false);
                 var remove = x-1 + ',' + y;
                 removeItemFromArray(this.moveList, remove);
@@ -221,7 +651,6 @@ AI.prototype = {
         return status;
     },
     hitAdjSquare: function () { 
-        console.log("AI in the hitAdjSquare function");
         // clear status
         this.status = "gameStarted";
         // this function is try hit squares around one which has been hit
@@ -264,7 +693,7 @@ AI.prototype = {
            
     },
 
-    getRandMove: function () {
+    getRandMove: function () { //selects random move from remainder of move list
         var rand = getRandFromArray(this.moveList);
         return rand;
     },
@@ -336,19 +765,36 @@ AI.prototype = {
         });
     },
     hitShipDraw: function (x, y) {
+        this.counter = this.counter + 1;
         var eleID = "p" + x + "," + y;
         this.hitAI.push(eleID);
         document.getElementById(eleID).style.background = "red";
         this.lastHitTurn = [x,y];
         this.lastTurn = [x,y];
         this.hitLastTurn = 1;
-        //verify holding correct co-ords
-        console.log("status: " + this.status);
-        console.log("lastTurn: " + this.lastTurn);
-        console.log("lastHitTurn: " + this.lastHitTurn);
-        console.log("hitLastTurn flag: "+ this.hitLastTurn);
-        console.log("sunkLastTurn flag: "+ this.sunkLastTurn);
-        console.log("end of go");
+
+        
+
+        if (this.counter === 1) {
+            this.firstStep = [x,y];
+
+        }
+        if (this.counter === 2) {
+            this.secondStep = [x,y];
+
+        }
+        if (this.counter === 5 ){
+            AI.counter = 0;
+            AI.firstStep = [];
+            AI.secondStep = [];
+            // Verticle or horizontal
+            AI.direction = null;
+            // positive or negative
+            AI.direction2 = null;
+            AI.status = "none"; 
+        }
+        
+
 
     },
     missedShipDraw: function (x, y) {
@@ -357,13 +803,7 @@ AI.prototype = {
         document.getElementById(eleID).style.background = "grey";
         this.lastTurn = [x,y];
         this.hitLastTurn = 0;
-        //verify holding correct co-ords
-        console.log("status: " + this.status);
-        console.log("lastTurn: " + this.lastTurn);
-        console.log("lastHitTurn: " + this.lastHitTurn);
-        console.log("hitLastTurn flag: "+ this.hitLastTurn);
-        console.log("sunkLastTurn flag: "+ this.sunkLastTurn);
-        console.log("end of go");
+
     },
     hitMineDraw: function (x, y) {
         var eleID = "p" + x + "," + y;

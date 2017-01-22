@@ -92,7 +92,7 @@
             line-height: 1.4em;
             color: #333;
             margin-bottom:1em;
-                
+
         }
         #gameboard {
             position:relative;
@@ -121,9 +121,9 @@
         }
         #side {
             position: absolute;
-    
-    right: 16px;
-    font-size: 18px;
+
+            right: 16px;
+            font-size: 18px;
         }
         #aigameboard {
             position:relative;
@@ -316,14 +316,14 @@ p, button, input {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<body>
-            
-        <audio id="audio1" autoplay onloadeddata="setHalfVolume()" loop>
-        <source src="background_music.mp3" type="audio/mpeg">
+    <body>
 
-         Your browser does not support the audio element.
+        <audio id="audio1" autoplay onloadeddata="setHalfVolume()" loop>
+            <source src="background_music.mp3" type="audio/mpeg">
+
+            Your browser does not support the audio element.
         </audio>
-        
+
         <!--Below outputs menu bar-->
         <ul>
             <li><a href="welcome.html">Home Menu</a></li>
@@ -360,16 +360,18 @@ p, button, input {
 
         <h1 id = "title">Sinking Ships!</h1>
         <div id ="side">
-        <h1 id = "turn"></h1>
-        <h3 id="clock">00:00</h3>
+            <h1 id = "turn"></h1>
+            <h3 id="clock">00:00</h3>
+            <button type="button" id="btnMultiShot" style="height:50px; width:200px;">Fire Multi Shot</button>
+            <br>  This button allows you to shoot three times in a single go. <br> It can only be used once.<br> <br><br>
 
-        <form action="welcome.html" method="get">
-            <p><input type="Submit" value="Click to quit" style="height:50px; width:200px;"/></p>
+            <form action="welcome.html" method="get">
+                <input type="Submit" value="Click to quit" style="height:50px; width:200px;"/>
 
-        </form>
+            </form>
 
 
-        
+
         </div>
         
         

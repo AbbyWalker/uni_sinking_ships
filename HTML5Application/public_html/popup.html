@@ -94,8 +94,8 @@ and open the template in the editor.
                     box-sizing: border-box;         /* Safari 5.1+, Chrome 10+, Firefox 29+, Opera 7+, IE 8+, Android 4.0+, iOS any */
                     background: #f6f8f9; /* Old browsers */
                     border: 1px solid blue;
-                    width:30px;
-                    height:30px;
+                    width:50px;
+                    height:50px; 
             }
 
 
@@ -137,6 +137,22 @@ and open the template in the editor.
             <p><input type="Submit" value="Back to Home" style="height:50px; width:200px;"/></p>
 
         </form>
+        <script>
+            function getCookie(name) {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length == 2) return parts.pop().split(";").shift();
+            }
+            var shipsPos = getCookie('shipLocation');
+            var placeships = JSON.parse(shipsPos);
+            if (carRot == 0){
+                
+                
+            }
+            else if (carRot == 1){
+                
+            }
+        </script>
         
     </body>
 </html>
