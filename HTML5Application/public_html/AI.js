@@ -29,6 +29,8 @@ function AI(xSize, ySize, difficulty) {
     this.currentScore = 0;
     this.lastTurnsNotEqual = 0;
     this.extraShotOption = 0;
+    this.numOfMisses = 0;
+    
 
 }
 
@@ -51,11 +53,10 @@ AI.prototype = {
 
         } else {
             this.sunkLastTurn = 0;
-           // if (this.extraShotOption <2) {
-           //     console.log("extra shot for AI");
-           //     this.extraShot = 2;
-           //     this.extraShotOption = this.extraShotOption + 1;
-           // }
+            if (this.extraShotOption ===5 ) {
+                console.log("extra shot for AI");
+                this.extraShot = 2;
+            }
         }
         
     },
@@ -313,7 +314,7 @@ AI.prototype = {
         var xTwo = moveTwo[0];
         var yTwo = moveTwo[1];
         
-        if (lastX!= hitX && lastY != hitY) {
+        if (lastX!== hitX && lastY !== hitY || this.numOfMisses>= 2) {
             // if the last go was a miss then it may need to start firing
             // at other end of ship
             console.log("made it here2");
@@ -322,7 +323,7 @@ AI.prototype = {
             } else if(this.direction2 === "negative") {
                 this.direction2 = "positive";
             } 
-        }
+        } //else if(this.numOfMisses>= 2)
         
         // var coord with be location to move too
         var coord = hitX + "," + hitY; 
@@ -338,19 +339,6 @@ AI.prototype = {
                 while (keepLooking === 2) {
                     // look at next coord and see if in moveList
                     coord = hitX + "," + hitY;
-                    if (hitX>(xLength-1) ||  hitY>(yLength-1)  || hitX<0 || hitY<0) {
-                        if (this.direction2 === "positive") {
-                            this.direction2 = "negative";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        } else if(this.direction2 === "negative") {
-                            this.direction2 = "positive";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        }
-                    }
                     if (this.moveList.includes(coord)) {
                         // Found a move to try, break loop by 
                         keepLooking = 1;
@@ -364,6 +352,10 @@ AI.prototype = {
                         console.log(remove);
                         removeItemFromArray(this.moveList, remove);
                     } else {
+                        if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
+                            this.direction2 = "negative";
+                            AI.smartMovePart2();
+                        }
                         hitX = hitX + 1; 
                     }
                 }
@@ -374,19 +366,7 @@ AI.prototype = {
                 while (keepLooking === 2) {
                     // look at next coord and see if in moveList
                     coord = hitX + "," + hitY;
-                    if (hitX>(xLength-1) ||  hitY>(yLength-1) || hitX<0 || hitY<0) {
-                        if (this.direction2 === "positive") {
-                            this.direction2 = "negative";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        } else if (this.direction2 === "negative") {
-                            this.direction2 = "positive";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        }
-                    }
+
                     if (this.moveList.includes(coord)) {
                         // Found a move to try, break loop 
                         keepLooking = 1;
@@ -398,6 +378,10 @@ AI.prototype = {
                         console.log(remove);
                         removeItemFromArray(this.moveList, remove);
                     } else {
+                        if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
+                            this.direction2 = "positive";
+                            AI.smartMovePart2();                       
+                        }
                         hitX = hitX - 1; 
                     }
                 }
@@ -410,19 +394,6 @@ AI.prototype = {
                 while (keepLooking === 2) {
                     // look at next coord and see if in moveList
                     coord = hitX + "," + hitY;
-                    if (hitX>(xLength-1) || hitY>(yLength-1)  || hitX<0 || hitY<0 ) {
-                        if (this.direction2 === "positive") {
-                            this.direction2 = "negative";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        } else if(this.direction2 === "negative") {
-                            this.direction2 = "positive";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        }
-                    }
                     if (this.moveList.includes(coord)) {
                         // Found a move to try, break loop 
                         keepLooking = 1;
@@ -434,6 +405,10 @@ AI.prototype = {
                         console.log(remove);
                         removeItemFromArray(this.moveList, remove);
                     } else {
+                        if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
+                            this.direction2 = "negative";
+                            AI.smartMovePart2();
+                        }
                         hitY = hitY + 1;                     
                     }
                 }
@@ -444,19 +419,6 @@ AI.prototype = {
                 while (keepLooking === 2) {
                     // look at next coord and see if in moveList
                     coord = hitX + "," + hitY;
-                    if (hitX>(xLength-1) ||  hitY>(yLength-1) || hitX<0 || hitY<0) {
-                        if (this.direction2 === "positive") {
-                            this.direction2 = "negative";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        } else if(this.direction2 === "negative") {
-                            this.direction2 = "positive";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        }
-                    }
                     if (this.moveList.includes(coord)) {
                         // Found a move to try, break loop 
                         keepLooking = 1;
@@ -467,6 +429,10 @@ AI.prototype = {
                         console.log(remove);
                         removeItemFromArray(this.moveList, remove);
                     } else {
+                        if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
+                            this.direction2 = "positive";
+                            AI.smartMovePart2();                       
+                        }
                          hitY = hitY - 1;                         
                     }
                 } 
@@ -776,7 +742,8 @@ AI.prototype = {
         this.lastHitTurn = [x,y];
         this.lastTurn = [x,y];
         this.hitLastTurn = 1;
-
+        this.extraShotOption = this.extraShotOption + 1;
+        this.numOfMisses = 0;
         
 
         if (this.counter === 1) {
@@ -807,6 +774,7 @@ AI.prototype = {
         document.getElementById(eleID).style.background = "grey";
         this.lastTurn = [x,y];
         this.hitLastTurn = 0;
+        this.numOfMisses = this.numOfMisses + 1;
 
     },
     hitMineDraw: function (x, y) {
