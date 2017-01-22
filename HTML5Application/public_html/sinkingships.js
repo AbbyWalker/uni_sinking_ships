@@ -76,9 +76,11 @@ function startPlayerMove(target) {
         player.extraShot = player.extraShot - 1;
         restoreOnClick();
     }
-    ;
+    
     document.getElementById("pscore").innerHTML = "Your Score: " + aiShipsAlive();
-    if(aiShipsAlive == 5){
+    console.log("up")
+    if(aiShipsAlive() == 5){
+        console.log("down");
         gameWon = true;
     }
 }
@@ -152,12 +154,11 @@ function restoreOnClick() {
 ;
 
 function endGame() {
-    var winner;
     if (userScore == 5){
-        winner = 'You';
+        $("#winner").text("You Won!!");
     }
     else if (aiScore == 5){
-        winner = 'Computer';
+        $("#winner").text("You Lost :(");
     }
     window.document.location.href = 'popup.html';
 }
@@ -198,7 +199,7 @@ function playerShipsAlive() {
         deadPlayerShipCount--;
     }
     if (deadPlayerShipCount === 0) {
-        //gameWon = true;
+        
     }
     return deadPlayerShipCount;
 }
