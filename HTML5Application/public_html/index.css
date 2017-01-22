@@ -28,7 +28,13 @@ body {
 			overflow: hidden;
 		}
 
-
+.content {
+  position: relative;
+  padding-top: 80px;
+}
+.content p {
+  margin-bottom: 10px;
+}
 
 /* background color when you hover over the menu options */
                  a:hover {
@@ -112,7 +118,8 @@ font-size: large;
             height:250px;
             float:left;
             z-index: -1;
-            padding-right: 5em;
+            padding-right: 5.5em;
+            padding-left: 4em;
             
             
         }
@@ -216,18 +223,38 @@ font-size: large;
             color: #06D85F;
         }
         .popup .content {
-            max-height: 20%;
+            max-height: 30%;
             overflow: auto;
         }
-        
-        .content {
-        position: relative;
-        
-        }
-      .content p {
-      margin-bottom: 10px;
-       }
-        
+        /* styling for multishot border */
+          #multishot{
+              
+              border: solid black;
+              width: 10%;
+              float: right;
+              padding: 5px;
+              
+          }
+          
+              /* styling for multishot button */
+          #multishot button{
+              width:100%;
+              height: 200%;
+              border-radius: 15px;
+              background-color: #4CAF50;
+              color: white;
+              position: relative;
+              padding: 10px 3px;
+              font-weight: bold;
+              font-family: helvetica, sans-serif;
+              font-size:16px;
+          }
+          
+        p {
+            font-weight: bold;
+            font-family: helvetica, sans-serif;
+          }
           /* styling for mobile devices */
           
-       
+        
+  
