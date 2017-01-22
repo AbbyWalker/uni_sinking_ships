@@ -209,5 +209,5 @@ function playerShipsAlive() {
     }
     return deadPlayerShipCount;
 }
-}
+
 ;
