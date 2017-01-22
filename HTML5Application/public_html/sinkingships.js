@@ -22,7 +22,7 @@ var playerTurn = playerSettings.playerTurn;
 var AIthoughts = 0;
 var debug = true; //turn AI thinking on or off / true or false
 //default settings
-var gameWon = False;
+var gameWon = false;
 setHalfVolume();
 
 startGame(xLength, yLength, difficulty, playerTurn);
