@@ -78,18 +78,27 @@ font-size: large;
 }
 /* Styling for the dialog boxes */
 .pbox{
-      width:100px;
-      height:100px;
-      border: 1px solid black;
-      background: #f0f8ff;
-      float: left;
+
+    position:absolute;
+    width:100px;
+    height:100px;
+    float:left;
+    top:500px;
+    margin-left: -750px;
+    display: inline-block;
+    border: 1px solid black;
+    background: #f0f8ff;
 }
 .aibox{
-        width:100px;
-        height:100px;
-        border: 1px solid black;
-        background: #ffffff;
-        float: right;
+    position:absolute;
+    width:100px;
+    height:100px;
+    float:right;
+    top:500px;
+    margin-left: -250px;
+    display: inline-block;
+    border: 1px solid black;
+    background: #ffffff;
 }
 /* Styling for navigation menus*/
 #nav {
