@@ -30,6 +30,7 @@ function AI(xSize, ySize, difficulty) {
     this.lastTurnsNotEqual = 0;
     this.extraShotOption = 0;
     this.numOfMisses = 0;
+    
 
 }
 
@@ -52,7 +53,7 @@ AI.prototype = {
 
         } else {
             this.sunkLastTurn = 0;
-            if (this.extraShotOption ==3 || this.extraShotOption ==5 ) {
+            if (this.extraShotOption ===5 ) {
                 console.log("extra shot for AI");
                 this.extraShot = 2;
             }
@@ -185,11 +186,11 @@ AI.prototype = {
         console.log("direction: " + this.direction);
         console.log("direction2: "+ this.durection2);
         
-        if (this.direction2 !== null || this.numOfMisses > 1) {
+        if (this.direction2 !== null) {
             AI.smartMovePart2();
         }
         
-        if (lastX!= hitX && lastY != hitY || this.numOfMisses > 1) {
+        if (lastX!= hitX && lastY != hitY) {
             // if the last go was a miss then it may need to start firing
             // at other end of ship
             console.log("made it here");
@@ -313,7 +314,24 @@ AI.prototype = {
         var xTwo = moveTwo[0];
         var yTwo = moveTwo[1];
         
-        if (lastX!= hitX && lastY != hitY || this.numOfMisses > 1) {
+        if (hitX==0) {
+            hitX = hitX + 1;
+            console("1");
+        }
+        if (hitY == 0) {
+            hitY = hitY + 1;
+            console("1");
+        }
+        if (hitX==(xLength-1)) {
+            hitX = hitX - 1;
+            console("1");
+        }
+        if (hitY == (yLength-1)) {
+            hitY = hitY -1;
+            console("1");
+        }
+        
+        if (lastX!== hitX && lastY !== hitY || this.numOfMisses>= 2) {
             // if the last go was a miss then it may need to start firing
             // at other end of ship
             console.log("made it here2");
@@ -321,8 +339,9 @@ AI.prototype = {
                 this.direction2 = "negative";
             } else if(this.direction2 === "negative") {
                 this.direction2 = "positive";
+
             } 
-        }
+        } //else if(this.numOfMisses>= 2)
         
         // var coord with be location to move too
         var coord = hitX + "," + hitY; 
@@ -338,19 +357,6 @@ AI.prototype = {
                 while (keepLooking === 2) {
                     // look at next coord and see if in moveList
                     coord = hitX + "," + hitY;
-                    if (hitX>(xLength-1) ||  hitY>(yLength-1)  || hitX<0 || hitY<0) {
-                        if (this.direction2 === "positive") {
-                            this.direction2 = "negative";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        } else if(this.direction2 === "negative") {
-                            this.direction2 = "positive";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        }
-                    }
                     if (this.moveList.includes(coord)) {
                         // Found a move to try, break loop by 
                         keepLooking = 1;
@@ -358,11 +364,18 @@ AI.prototype = {
                         // validation of board size
 
                         this.status = "hitNextSqaure";
-                        console.log("FIRE 1");
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
+                        this.direction2 = null;
+                        console.log(remove);
                         removeItemFromArray(this.moveList, remove);
                     } else {
+                        if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
+                            //this.direction2 = "negative";
+                            //this.numOfMisses = 0;
+                            //AI.smartMovePart2();
+                            AI.makeComputerMoveEasy();
+                        }
                         hitX = hitX + 1; 
                     }
                 }
@@ -373,31 +386,24 @@ AI.prototype = {
                 while (keepLooking === 2) {
                     // look at next coord and see if in moveList
                     coord = hitX + "," + hitY;
-                    console.log(coord);
-                    if (hitX>(xLength-1) ||  hitY>(yLength-1) || hitX<0 || hitY<0) {
-                        if (this.direction2 === "positive") {
-                            this.direction2 = "negative";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        } else if (this.direction2 === "negative") {
-                            this.direction2 = "positive";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        }
-                    }
+
                     if (this.moveList.includes(coord)) {
                         // Found a move to try, break loop 
                         keepLooking = 1;
                         // make move:
                         this.status = "hitNextSqaure";
-                        console.log("FIRE 2");
                         player.grid.fireAtLocation(hitX, hitY, false);
                         this.direction2 = null;
                         var remove = hitX + ',' + hitY;
+                        console.log(remove);
                         removeItemFromArray(this.moveList, remove);
                     } else {
+                        if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
+                            //this.direction2 = "positive";
+                            //this.numOfMisses = 0;
+                            //AI.smartMovePart2(); 
+                            AI.makeComputerMoveEasy();
+                        }
                         hitX = hitX - 1; 
                     }
                 }
@@ -410,30 +416,23 @@ AI.prototype = {
                 while (keepLooking === 2) {
                     // look at next coord and see if in moveList
                     coord = hitX + "," + hitY;
-                    if (hitX>(xLength-1) || hitY>(yLength-1)  || hitX<0 || hitY<0 ) {
-                        if (this.direction2 === "positive") {
-                            this.direction2 = "negative";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        } else if(this.direction2 === "negative") {
-                            this.direction2 = "positive";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        }
-                    }
                     if (this.moveList.includes(coord)) {
                         // Found a move to try, break loop 
                         keepLooking = 1;
                         // make move:
                         this.status = "hitNextSqaure";
-                        console.log("FIRE 3");
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
                         this.direction2 = null;
+                        console.log(remove);
                         removeItemFromArray(this.moveList, remove);
                     } else {
+                        if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
+                            AI.makeComputerMoveEasy();
+                            //this.direction2 = "negative";
+                            //this.numOfMisses = 0;
+                            //AI.smartMovePart2();
+                        }
                         hitY = hitY + 1;                     
                     }
                 }
@@ -444,29 +443,22 @@ AI.prototype = {
                 while (keepLooking === 2) {
                     // look at next coord and see if in moveList
                     coord = hitX + "," + hitY;
-                    if (hitX>(xLength-1) ||  hitY>(yLength-1) || hitX<0 || hitY<0) {
-                        if (this.direction2 === "positive") {
-                            this.direction2 = "negative";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        } else if(this.direction2 === "negative") {
-                            this.direction2 = "positive";
-                            console.log("direction2 should be opp: " + this.direction2);
-                            console.log("HAD TO COMPLETE RESET DIRECTION2");
-                            AI.smartMovePart2();
-                        }
-                    }
                     if (this.moveList.includes(coord)) {
                         // Found a move to try, break loop 
                         keepLooking = 1;
                         // make move:
                         this.status = "hitNextSqaure";
-                        console.log("FIRE 4");
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
+                        console.log(remove);
                         removeItemFromArray(this.moveList, remove);
                     } else {
+                        if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
+                            //this.direction2 = "positive";
+                            //this.numOfMisses = 0;
+                            //AI.smartMovePart2(); 
+                            AI.makeComputerMoveEasy();
+                        }
                          hitY = hitY - 1;                         
                     }
                 } 
@@ -776,8 +768,9 @@ AI.prototype = {
         this.lastHitTurn = [x,y];
         this.lastTurn = [x,y];
         this.hitLastTurn = 1;
-        this.numOfMisses = 0;
         this.extraShotOption = this.extraShotOption + 1;
+        this.numOfMisses = 0;
+        
 
         if (this.counter === 1) {
             this.firstStep = [x,y];
