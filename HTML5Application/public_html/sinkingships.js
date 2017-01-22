@@ -22,7 +22,7 @@ var playerTurn = playerSettings.playerTurn;
 var AIthoughts = 0;
 var debug = true; //turn AI thinking on or off / true or false
 //default settings
-
+var gameWon = False;
 setHalfVolume();
 
 startGame(xLength, yLength, difficulty, playerTurn);
@@ -141,14 +141,13 @@ function restoreOnClick() {
 
 function endGame() {
     var winner;
-    if (playerShipsAlive() === 0){
+    if (userScore == 5){
         winner = 'You';
     }
-    else {
+    else if (aiScore == 5){
         winner = 'Computer';
     }
-    alert("Games Over\n\
-    The Winner is: " + winner );//should probs do something a little more interesting here
+    window.document.location.href = 'popup.html';
 }
 ;
 function aiShipsAlive() {
@@ -160,9 +159,10 @@ function aiShipsAlive() {
         }
     }
     if (deadAIShipCount === AI.ship.length) {
-        endGame();
+        gameWon = true
     }
     return deadAIShipCount;
+    
 }
 ;
 
@@ -184,7 +184,7 @@ function playerShipsAlive() {
         deadPlayerShipCount--;
     }
     if (deadPlayerShipCount === 0) {
-        endGame();
+        gameWon = true;
     }
     return deadPlayerShipCount;
 }

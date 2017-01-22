@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <style>
+
+        .destroyerAI {
+        }
+        .carrierAI {
+        }
+        .submarineAI {
+        }
+        .battleshipAI {
+        }
+        .cruiserAI {
+        }
+        .mine1AI {
+        }
+        .mine2AI {
+        }
+        .mine3AI {
+        }
+        .destroyer {
+        }
+        .carrier {
+        }
+        .submarine {
+        }
+        .battleship {
+        }
+        .cruiser {
+        }
+        .mine1 {
+        }
+        .mine2 {
+        }
+        .mine3 {
+        }
+
+        body {
+            background-color: lightskyblue;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: top center;
+            text-align: center;
+            margin: 60px auto;
+            width: 70%;
+            max-width: 1350px;
+        }
+        h1 {
+            font-size: 3em;
+            font-family:'Helvetica', 'Arial', 'Sans-Serif';
+        }
+        p, button, input {
+            font-size: 1.5em;
+            line-height: 1.4em;
+            color: #333;
+            margin-bottom:1em;
+                
+        }
+        body {
+            background-color: lightskyblue;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: top center;
+            text-align: center;
+            margin: 60px auto;
+            width: 70%;
+            max-width: 1350px;
+            }
+            h1 {
+                font-size: 3em;
+                font-family:'Helvetica', 'Arial', 'Sans-Serif';
+            }
+            p, button, input {
+                font-size: 1.5em;
+                line-height: 1.4em;
+                color: #333;
+                    margin-bottom:1em;
+            }
+            #gameboard {
+                    position:relative;
+                    margin:0 auto 2em auto;
+                    width:500px;
+                    height:500px;
+                    float:left;
+                    z-index: -1;
+            }
+            #gameboard div {
+                    display: inline-block;
+                    position:absolute;
+                    -webkit-box-sizing: border-box; /* Safari 3.0 - 5.0, Chrome 1 - 9, Android 2.1 - 3.x */
+                    -moz-box-sizing: border-box;    /* Firefox 1 - 28 */
+                    box-sizing: border-box;         /* Safari 5.1+, Chrome 10+, Firefox 29+, Opera 7+, IE 8+, Android 4.0+, iOS any */
+                    background: #f6f8f9; /* Old browsers */
+                    border: 1px solid blue;
+                    width:30px;
+                    height:30px;
+            }
+
+
+            #aigameboard {
+                    position:relative;
+                    margin:0 auto 2em auto;
+                    width:500px;
+                    height:500px;
+                    float:right;
+                    z-index: -1;
+            }
+            #aigameboard div {
+                    display: inline-block;
+                    position:absolute;
+                    -webkit-box-sizing: border-box; /* Safari 3.0 - 5.0, Chrome 1 - 9, Android 2.1 - 3.x */
+                    -moz-box-sizing: border-box;    /* Firefox 1 - 28 */
+                    box-sizing: border-box;         /* Safari 5.1+, Chrome 10+, Firefox 29+, Opera 7+, IE 8+, Android 4.0+, iOS any */
+                    background: #f6f8f9; /* Old browsers */
+                    border: 1px solid black;
+                    width:50px;
+                    height:50px; 
+            }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <body>
+
+    <head>
+        <h1>Game Over</h1>
+        <script>
+            $(function(){
+                $('#button').click(function() {
+                    window.close();
+                    window.open('http://146.148.7.252:8880/welcome.html/'); 
+                });
+            });
+        </script>
+    </head>
+    
+    
+        
+        <div id="gameboard"></div>
+
+        <div id="aigameboard"></div>
+
+        
+        
+    </body>
+</html>
