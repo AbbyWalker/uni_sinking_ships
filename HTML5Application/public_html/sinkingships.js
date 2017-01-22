@@ -138,6 +138,7 @@ function makeAIMove() {
     }
 
 }
+
 ;
 function restoreOnClick() {
 
