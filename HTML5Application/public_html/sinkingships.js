@@ -26,8 +26,8 @@ var gameWon = false;
 setHalfVolume();
 
 startGame(xLength, yLength, difficulty, playerTurn);
-var aiScore = aiShipsAlive();
-var userScore = playerShipsAlive();
+var userScore = aiShipsAlive();
+var aiScore = playerShipsAlive();
 
 function startGame(xLength, yLength, difficulty, playerTurn) {//configures and starts the game
 
@@ -58,9 +58,8 @@ function startGame(xLength, yLength, difficulty, playerTurn) {//configures and s
 function startPlayerMove(target) {
     $('#aigameboard').children().off('click');
 
-    player.makePlayerMove(target);
-    //var userScore = playerShipsAlive();    
-    if (gameWon === true) {
+    player.makePlayerMove(target);  
+    if (gameWon == true) {
         endGame();
     }
 
@@ -78,6 +77,9 @@ function startPlayerMove(target) {
         AI.missNextGo = false;
     }
     document.getElementById("pscore").innerHTML = "Your Score: " + aiShipsAlive();
+    if(aiShipsAlive == 5){
+        gameWon = true;
+    }
 }
 ;
 function makeAIMove() {
@@ -93,9 +95,8 @@ function makeAIMove() {
     //player.drawGrid();
     aiShipsAlive();
     playerTurn = true;
-    var aiScore = aiShipsAlive();
 
-    if (gameWon === true) {
+    if (gameWon == true) {
         endGame();
     }
     if (player.missNextGo === true) {
@@ -122,6 +123,9 @@ function makeAIMove() {
     }
 
     document.getElementById("cscore").innerHTML = "Computer's Score: " + playerShipsAlive()
+    if (playerShipsAlive() == 5){
+        gameWon = true;
+    }
 
 }
 ;
@@ -158,9 +162,9 @@ function aiShipsAlive() {
             deadAIShipCount--;
         }
     }
-    if (deadAIShipCount === AI.ship.length) {
-        gameWon = true
-    }
+    //if (deadAIShipCount == AI.ship.length) {
+      //  gameWon = true
+    //}
     return deadAIShipCount;
     
 }
@@ -184,7 +188,7 @@ function playerShipsAlive() {
         deadPlayerShipCount--;
     }
     if (deadPlayerShipCount === 0) {
-        gameWon = true;
+        //gameWon = true;
     }
     return deadPlayerShipCount;
 }
