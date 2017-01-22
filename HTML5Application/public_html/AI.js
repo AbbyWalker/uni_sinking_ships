@@ -53,7 +53,7 @@ AI.prototype = {
 
         } else {
             this.sunkLastTurn = 0;
-            if (this.extraShotOption ===5 ) {
+            if (this.extraShotOption ==5 ) {
                 console.log("extra shot for AI");
                 this.extraShot = 2;
             }
@@ -61,7 +61,6 @@ AI.prototype = {
         
     },
     makeComputerMoveEasy: function () {
-
         var move = AI.getRandMove();
         var coord = move.split(',').map(Number);
         var x = coord[0];
@@ -131,7 +130,10 @@ AI.prototype = {
                 this.direction = "horizontal";
                 // go to AI.smartMove to continue turn
                 AI.smartMove();
+            } else if (this.direction != null) {
+                this.direction = this.direction
             } else {
+                
                 // ERROR
                 window.alert("Error: AI doesn't recognise direction");
             }
@@ -316,19 +318,19 @@ AI.prototype = {
         
         if (hitX==0) {
             hitX = hitX + 1;
-            console("1");
+
         }
         if (hitY == 0) {
             hitY = hitY + 1;
-            console("1");
+
         }
         if (hitX==(xLength-1)) {
             hitX = hitX - 1;
-            console("1");
+
         }
         if (hitY == (yLength-1)) {
             hitY = hitY -1;
-            console("1");
+
         }
         
         if (lastX!== hitX && lastY !== hitY || this.numOfMisses>= 2) {
@@ -374,6 +376,15 @@ AI.prototype = {
                             //this.direction2 = "negative";
                             //this.numOfMisses = 0;
                             //AI.smartMovePart2();
+                            keepLooking =1;
+                            //this.counter = 0;
+                            //this.firstStep = [];
+                            //this.secondStep = [];
+                            // Verticle or horizontal
+                            //this.direction = null;
+                            // positive or negative
+                            //this.direction2 = null;
+                            //this.status = "none"; 
                             AI.makeComputerMoveEasy();
                         }
                         hitX = hitX + 1; 
@@ -402,6 +413,7 @@ AI.prototype = {
                             //this.direction2 = "positive";
                             //this.numOfMisses = 0;
                             //AI.smartMovePart2(); 
+                            keepLooking=1;
                             AI.makeComputerMoveEasy();
                         }
                         hitX = hitX - 1; 
@@ -428,6 +440,7 @@ AI.prototype = {
                         removeItemFromArray(this.moveList, remove);
                     } else {
                         if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
+                            keepLooking=1;
                             AI.makeComputerMoveEasy();
                             //this.direction2 = "negative";
                             //this.numOfMisses = 0;
@@ -456,7 +469,8 @@ AI.prototype = {
                         if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
                             //this.direction2 = "positive";
                             //this.numOfMisses = 0;
-                            //AI.smartMovePart2(); 
+                            //AI.smartMovePart2();
+                            keepLooking=1;
                             AI.makeComputerMoveEasy();
                         }
                          hitY = hitY - 1;                         
@@ -689,7 +703,7 @@ AI.prototype = {
            
     },
 
-    getRandMove: function () { //selects random move from remainder of move list
+    getRandMove: function () {
         var rand = getRandFromArray(this.moveList);
         return rand;
     },
