@@ -52,11 +52,10 @@ AI.prototype = {
 
         } else {
             this.sunkLastTurn = 0;
-           // if (this.extraShotOption <2) {
-           //     console.log("extra shot for AI");
-           //     this.extraShot = 2;
-           //     this.extraShotOption = this.extraShotOption + 1;
-           // }
+            if (this.extraShotOption ==3 || this.extraShotOption ==5 ) {
+                console.log("extra shot for AI");
+                this.extraShot = 2;
+            }
         }
         
     },
@@ -359,17 +358,10 @@ AI.prototype = {
                         // validation of board size
 
                         this.status = "hitNextSqaure";
+                        console.log("FIRE 1");
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
                         removeItemFromArray(this.moveList, remove);
-                        this.counter = 0;
-                        this.firstStep = [];
-                        this.secondStep = [];
-                        // Verticle or horizontal
-                        this.direction = null;
-                        // positive or negative
-                        this.direction2 = null;
-                        this.status = "none"; 
                     } else {
                         hitX = hitX + 1; 
                     }
@@ -381,6 +373,7 @@ AI.prototype = {
                 while (keepLooking === 2) {
                     // look at next coord and see if in moveList
                     coord = hitX + "," + hitY;
+                    console.log(coord);
                     if (hitX>(xLength-1) ||  hitY>(yLength-1) || hitX<0 || hitY<0) {
                         if (this.direction2 === "positive") {
                             this.direction2 = "negative";
@@ -399,18 +392,11 @@ AI.prototype = {
                         keepLooking = 1;
                         // make move:
                         this.status = "hitNextSqaure";
+                        console.log("FIRE 2");
                         player.grid.fireAtLocation(hitX, hitY, false);
                         this.direction2 = null;
                         var remove = hitX + ',' + hitY;
                         removeItemFromArray(this.moveList, remove);
-                        this.counter = 0;
-                        this.firstStep = [];
-                        this.secondStep = [];
-                        // Verticle or horizontal
-                        this.direction = null;
-                        // positive or negative
-                        this.direction2 = null;
-                        this.status = "none"; 
                     } else {
                         hitX = hitX - 1; 
                     }
@@ -442,18 +428,11 @@ AI.prototype = {
                         keepLooking = 1;
                         // make move:
                         this.status = "hitNextSqaure";
+                        console.log("FIRE 3");
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
                         this.direction2 = null;
                         removeItemFromArray(this.moveList, remove);
-                        this.counter = 0;
-                        this.firstStep = [];
-                        this.secondStep = [];
-                        // Verticle or horizontal
-                        this.direction = null;
-                        // positive or negative
-                        this.direction2 = null;
-                        this.status = "none"; 
                     } else {
                         hitY = hitY + 1;                     
                     }
@@ -483,17 +462,10 @@ AI.prototype = {
                         keepLooking = 1;
                         // make move:
                         this.status = "hitNextSqaure";
+                        console.log("FIRE 4");
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
                         removeItemFromArray(this.moveList, remove);
-                        this.counter = 0;
-                        this.firstStep = [];
-                        this.secondStep = [];
-                        // Verticle or horizontal
-                        this.direction = null;
-                        // positive or negative
-                        this.direction2 = null;
-                        this.status = "none"; 
                     } else {
                          hitY = hitY - 1;                         
                     }
@@ -805,7 +777,7 @@ AI.prototype = {
         this.lastTurn = [x,y];
         this.hitLastTurn = 1;
         this.numOfMisses = 0;
-        
+        this.extraShotOption = this.extraShotOption + 1;
 
         if (this.counter === 1) {
             this.firstStep = [x,y];
