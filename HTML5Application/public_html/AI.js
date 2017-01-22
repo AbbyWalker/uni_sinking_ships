@@ -362,13 +362,6 @@ AI.prototype = {
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
                         removeItemFromArray(this.moveList, remove);
-                        this.counter = 0;
-                        this.firstStep = [];
-                        this.secondStep = [];
-                        // Verticle or horizontal
-                        // positive or negative
-                        this.direction2 = null;
-                        this.status = "none"; 
                     } else {
                         hitX = hitX + 1; 
                     }
@@ -380,6 +373,7 @@ AI.prototype = {
                 while (keepLooking === 2) {
                     // look at next coord and see if in moveList
                     coord = hitX + "," + hitY;
+                    console.log(coord);
                     if (hitX>(xLength-1) ||  hitY>(yLength-1) || hitX<0 || hitY<0) {
                         if (this.direction2 === "positive") {
                             this.direction2 = "negative";
@@ -403,13 +397,6 @@ AI.prototype = {
                         this.direction2 = null;
                         var remove = hitX + ',' + hitY;
                         removeItemFromArray(this.moveList, remove);
-                        this.counter = 0;
-                        this.firstStep = [];
-                        this.secondStep = [];
-                        // Verticle or horizontal
-                        // positive or negative
-                        this.direction2 = null;
-                        this.status = "none"; 
                     } else {
                         hitX = hitX - 1; 
                     }
@@ -446,13 +433,6 @@ AI.prototype = {
                         var remove = hitX + ',' + hitY;
                         this.direction2 = null;
                         removeItemFromArray(this.moveList, remove);
-                        this.counter = 0;
-                        this.firstStep = [];
-                        this.secondStep = [];
-                        // Verticle or horizontal
-                        // positive or negative
-                        this.direction2 = null;
-                        this.status = "none"; 
                     } else {
                         hitY = hitY + 1;                     
                     }
@@ -486,13 +466,6 @@ AI.prototype = {
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
                         removeItemFromArray(this.moveList, remove);
-                        this.counter = 0;
-                        this.firstStep = [];
-                        this.secondStep = [];
-                        // Verticle or horizontal
-                        // positive or negative
-                        this.direction2 = null;
-                        this.status = "none"; 
                     } else {
                          hitY = hitY - 1;                         
                     }
