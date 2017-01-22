@@ -314,6 +314,23 @@ AI.prototype = {
         var xTwo = moveTwo[0];
         var yTwo = moveTwo[1];
         
+        if (hitX==0) {
+            hitX = hitX + 1;
+            console("1");
+        }
+        if (hitY == 0) {
+            hitY = hitY + 1;
+            console("1");
+        }
+        if (hitX==(xLength-1)) {
+            hitX = hitX - 1;
+            console("1");
+        }
+        if (hitY == (yLength-1)) {
+            hitY = hitY -1;
+            console("1");
+        }
+        
         if (lastX!== hitX && lastY !== hitY || this.numOfMisses>= 2) {
             // if the last go was a miss then it may need to start firing
             // at other end of ship
@@ -322,6 +339,7 @@ AI.prototype = {
                 this.direction2 = "negative";
             } else if(this.direction2 === "negative") {
                 this.direction2 = "positive";
+
             } 
         } //else if(this.numOfMisses>= 2)
         
@@ -353,8 +371,10 @@ AI.prototype = {
                         removeItemFromArray(this.moveList, remove);
                     } else {
                         if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
-                            this.direction2 = "negative";
-                            AI.smartMovePart2();
+                            //this.direction2 = "negative";
+                            //this.numOfMisses = 0;
+                            //AI.smartMovePart2();
+                            AI.makeComputerMoveEasy();
                         }
                         hitX = hitX + 1; 
                     }
@@ -379,8 +399,10 @@ AI.prototype = {
                         removeItemFromArray(this.moveList, remove);
                     } else {
                         if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
-                            this.direction2 = "positive";
-                            AI.smartMovePart2();                       
+                            //this.direction2 = "positive";
+                            //this.numOfMisses = 0;
+                            //AI.smartMovePart2(); 
+                            AI.makeComputerMoveEasy();
                         }
                         hitX = hitX - 1; 
                     }
@@ -406,8 +428,10 @@ AI.prototype = {
                         removeItemFromArray(this.moveList, remove);
                     } else {
                         if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
-                            this.direction2 = "negative";
-                            AI.smartMovePart2();
+                            AI.makeComputerMoveEasy();
+                            //this.direction2 = "negative";
+                            //this.numOfMisses = 0;
+                            //AI.smartMovePart2();
                         }
                         hitY = hitY + 1;                     
                     }
@@ -430,8 +454,10 @@ AI.prototype = {
                         removeItemFromArray(this.moveList, remove);
                     } else {
                         if (hitX>(xLength-1) ||  hitY>(yLength-1)   || (hitX<0) || (hitY<0)) {
-                            this.direction2 = "positive";
-                            AI.smartMovePart2();                       
+                            //this.direction2 = "positive";
+                            //this.numOfMisses = 0;
+                            //AI.smartMovePart2(); 
+                            AI.makeComputerMoveEasy();
                         }
                          hitY = hitY - 1;                         
                     }
