@@ -12,20 +12,18 @@ function getCookie(name) {
         var placeships = JSON.parse(shipsPos);
         
 
-function player(name, xSize, ySize) {
-    this.name = name;
+function player(xSize, ySize) {
     this.moveList = this.buildMoveList(xSize, ySize);
     this.grid = new Grid(xSize, ySize);
     this.hitPlayer = [];
     this.missedPlayer = [];
     this.missNextGo = false;
+    this.extraShot = 0;
 }
 
 player.prototype = {
     constructor: player,
-    getName: function () {
-        return this.name;
-    },
+    
     makePlayerMove: function (move) {
         var moveCoord = move.substring(2);
         var coord = moveCoord.split(',').map(Number);
@@ -37,6 +35,7 @@ player.prototype = {
 
     },
     buildMoveList: function (xSize, ySize) {
+        //move list used to control available shots
         var moveList = [];
         for (i = 0; i < ySize; i++) {
             for (j = 0; j < xSize; j++) {
@@ -50,7 +49,7 @@ player.prototype = {
 
         PlayerShip1 = new ship('Carrier', 1);
         if(placeships.carRot == 0){
-            PlayerShip1.setLocations([[placeships.carX, placeships.carY, 0], [placeships.carX+1, placeships.carY, 0], [placeships.carX+2, placeships.carY+2, 0], [placeships.carX+3, placeships.carY, 0], [placeships.carX+4, placeships.carY, 0]]);
+            PlayerShip1.setLocations([[placeships.carX, placeships.carY, 0], [placeships.carX+1, placeships.carY, 0], [placeships.carX+2, placeships.carY, 0], [placeships.carX+3, placeships.carY, 0], [placeships.carX+4, placeships.carY, 0]]);
         }else{
             PlayerShip1.setLocations([[placeships.carX, placeships.carY, 0], [placeships.carX, placeships.carY+1, 0], [placeships.carX, placeships.carY+2, 0], [placeships.carX, placeships.carY+3, 0], [placeships.carX, placeships.carY+4, 0]]);
         }
