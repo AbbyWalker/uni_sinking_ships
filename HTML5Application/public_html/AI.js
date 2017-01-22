@@ -29,7 +29,6 @@ function AI(xSize, ySize, difficulty) {
     this.currentScore = 0;
     this.lastTurnsNotEqual = 0;
     this.extraShotOption = 0;
-    this.numOfMisses = 0;
 
 }
 
@@ -52,10 +51,11 @@ AI.prototype = {
 
         } else {
             this.sunkLastTurn = 0;
-            if (this.extraShotOption ==3 || this.extraShotOption ==5 ) {
-                console.log("extra shot for AI");
-                this.extraShot = 2;
-            }
+           // if (this.extraShotOption <2) {
+           //     console.log("extra shot for AI");
+           //     this.extraShot = 2;
+           //     this.extraShotOption = this.extraShotOption + 1;
+           // }
         }
         
     },
@@ -185,11 +185,11 @@ AI.prototype = {
         console.log("direction: " + this.direction);
         console.log("direction2: "+ this.durection2);
         
-        if (this.direction2 !== null || this.numOfMisses > 1) {
+        if (this.direction2 !== null) {
             AI.smartMovePart2();
         }
         
-        if (lastX!= hitX && lastY != hitY || this.numOfMisses > 1) {
+        if (lastX!= hitX && lastY != hitY) {
             // if the last go was a miss then it may need to start firing
             // at other end of ship
             console.log("made it here");
@@ -313,7 +313,7 @@ AI.prototype = {
         var xTwo = moveTwo[0];
         var yTwo = moveTwo[1];
         
-        if (lastX!= hitX && lastY != hitY || this.numOfMisses > 1) {
+        if (lastX!= hitX && lastY != hitY) {
             // if the last go was a miss then it may need to start firing
             // at other end of ship
             console.log("made it here2");
@@ -358,9 +358,10 @@ AI.prototype = {
                         // validation of board size
 
                         this.status = "hitNextSqaure";
-                        console.log("FIRE 1");
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
+                        this.direction2 = null;
+                        console.log(remove);
                         removeItemFromArray(this.moveList, remove);
                     } else {
                         hitX = hitX + 1; 
@@ -373,7 +374,6 @@ AI.prototype = {
                 while (keepLooking === 2) {
                     // look at next coord and see if in moveList
                     coord = hitX + "," + hitY;
-                    console.log(coord);
                     if (hitX>(xLength-1) ||  hitY>(yLength-1) || hitX<0 || hitY<0) {
                         if (this.direction2 === "positive") {
                             this.direction2 = "negative";
@@ -392,10 +392,10 @@ AI.prototype = {
                         keepLooking = 1;
                         // make move:
                         this.status = "hitNextSqaure";
-                        console.log("FIRE 2");
                         player.grid.fireAtLocation(hitX, hitY, false);
                         this.direction2 = null;
                         var remove = hitX + ',' + hitY;
+                        console.log(remove);
                         removeItemFromArray(this.moveList, remove);
                     } else {
                         hitX = hitX - 1; 
@@ -428,10 +428,10 @@ AI.prototype = {
                         keepLooking = 1;
                         // make move:
                         this.status = "hitNextSqaure";
-                        console.log("FIRE 3");
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
                         this.direction2 = null;
+                        console.log(remove);
                         removeItemFromArray(this.moveList, remove);
                     } else {
                         hitY = hitY + 1;                     
@@ -462,9 +462,9 @@ AI.prototype = {
                         keepLooking = 1;
                         // make move:
                         this.status = "hitNextSqaure";
-                        console.log("FIRE 4");
                         player.grid.fireAtLocation(hitX, hitY, false);
                         var remove = hitX + ',' + hitY;
+                        console.log(remove);
                         removeItemFromArray(this.moveList, remove);
                     } else {
                          hitY = hitY - 1;                         
@@ -776,8 +776,8 @@ AI.prototype = {
         this.lastHitTurn = [x,y];
         this.lastTurn = [x,y];
         this.hitLastTurn = 1;
-        this.numOfMisses = 0;
-        this.extraShotOption = this.extraShotOption + 1;
+
+        
 
         if (this.counter === 1) {
             this.firstStep = [x,y];
@@ -807,7 +807,6 @@ AI.prototype = {
         document.getElementById(eleID).style.background = "grey";
         this.lastTurn = [x,y];
         this.hitLastTurn = 0;
-        this.numOfMisses = this.numOfMisses + 1;
 
     },
     hitMineDraw: function (x, y) {
