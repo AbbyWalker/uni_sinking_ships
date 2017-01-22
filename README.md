@@ -1,9 +1,6 @@
 # uni_sinking_ships
 University Group Project Sept 16 - Jan 17.
 
-For the hack, the project will consist of three HTML pages:
-- Welcome page
-- Instructions/ rules page
-- Game play page.
+To run, download this zip folder and open up welcome.html within a web browser.
 
-Within the HTML page, the layout is created and styling added by referencing external CSS scripts. It is also within <script> tags that links to our javascript scripts will sit. 
+Alternatively you can visit the site on: http://146.148.7.252:8880/welcome.html?
