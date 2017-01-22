@@ -11,7 +11,7 @@
     <!--Below outputs background music for the page-->
             
         <audio id="audio1" autoplay onloadeddata="setHalfVolume()" loop>
-        <source src="background_music.mp3" type="audio/mpeg">
+            <source src="media/background_music.mp3" type="audio/mpeg">
 
          Your browser does not support the audio element.
         </audio>
@@ -28,7 +28,6 @@
             <li><a id = "turn"></a></li>
 
             <li><a href="#instructions">Instructions</a></li>
-            <li><a href="#pausegame">Pause Game</a></li>
             <li><a id="pscore"> Your Score: </a></li> 
             <li><a id="cscore"> Computer's Score: </a></li> 
             <li><a<form action="welcome.html" method="get">
@@ -68,6 +67,13 @@
                 <h3>Game Paused</h3>
                 <a class="close" href="#">&times;</a>
             </div>
+        </div>
+        
+        <!--Below outputs multi shot function-->
+        <div id = "multishot">
+       <button type="button" id="btnMultiShot">Fire Multi Shot</button>
+       <p>  This button allows you to shoot three times in a single go. 
+           <br> It can only be used once. </p>
         </div>
 
  <!--Extras   
