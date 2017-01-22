@@ -75,7 +75,38 @@
                 width: 70%;
             }
         }
-
+        .destroyerAI {
+        }
+        .carrierAI {
+        }
+        .submarineAI {
+        }
+        .battleshipAI {
+        }
+        .cruiserAI {
+        }
+        .mine1AI {
+        }
+        .mine2AI {
+        }
+        .mine3AI {
+        }
+        .destroyer {
+        }
+        .carrier {
+        }
+        .submarine {
+        }
+        .battleship {
+        }
+        .cruiser {
+        }
+        .mine1 {
+        }
+        .mine2 {
+        }
+        .mine3 {
+        }
 
         body {
             background-color: lightskyblue;
@@ -280,6 +311,22 @@ p, button, input {
 .hit {
 	background: red;
 }
+.box{
+	width:100px;
+	height:100px;
+        border: 1px solid black;
+        background: #f0f8ff;
+        float:left;
+        float: bottom;
+}
+.aibox{
+	width:100px;
+	height:100px;
+        border: 1px solid black;
+        background: #ffffff;
+        float: right;
+        float: bottom;
+}
 #aigameboard {
 	position:relative;
 	margin:0 auto 2em auto;
@@ -362,10 +409,14 @@ p, button, input {
 
         
         </div>
+        
+        
         <div id="gameboard"></div>
 
         <div id="aigameboard"></div>
-
+        
+        <h4 class="box" id="dialogueBox">Make a Move</h4>
+        <h5 class="aibox" id="aidialogueBox">Game Started</h5>
 
         <script src="jquery-1.6.1.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -376,5 +427,103 @@ p, button, input {
         <script type="text/javascript" src="general.js"></script>
         <script type="text/javascript" src="mine.js"></script>
         <script type="text/javascript" src="sinkingships.js"></script>
+        <script>
+         
+            if (subRot == 0){
+                subRot = 1;
+
+                document.getElementById("submarine").style.height = "156px";
+                document.getElementById("submarine").style.width = "52px";
+                document.getElementById("submarine").style.background = image = "url('Submarine_rotated.png')";
+            }
+            else {
+                subRot = 0;
+
+                document.getElementById("submarine").style.height = "52px";
+                document.getElementById("submarine").style.width = "156px";
+
+                document.getElementById("submarine").style.background = image = "url('Submarine.png')";
+            };
+
+            $('#destroyer').dblclick(function(){
+                if (desMoved == 0){
+                    if (desRot == 0){
+                        desRot = 1;
+
+                        document.getElementById("destroyer").style.height = "104px";
+                        document.getElementById("destroyer").style.width = "52px";
+
+                        document.getElementById("destroyer").style.background = image = "url('Destroyer_rotated.png')";
+                    }
+                    else {
+                        desRot = 0;
+
+                        document.getElementById("destroyer").style.height = "52px";
+                        document.getElementById("destroyer").style.width = "104px";
+
+                        document.getElementById("destroyer").style.background = image = "url('Destroyer.png')";
+                    }
+                }
+            });
+
+            $('#battleship').dblclick(function(){
+                if (batMoved == 0){
+                    if (batRot == 0){
+                        batRot = 1;
+
+                        document.getElementById("battleship").style.height = "208px";
+                        document.getElementById("battleship").style.width = "52px";
+
+                        document.getElementById("battleship").style.background = image = "url('Battleship_rotated.png')";
+                    }
+                    else {
+                        batRot = 0;
+
+                        document.getElementById("battleship").style.height = "52px";
+                        document.getElementById("battleship").style.width = "208px";
+
+                        document.getElementById("battleship").style.background = image = "url('Battleship.png')";
+                    }
+                }
+            });
+            $('#cruiser').dblclick(function(){
+                if (cruMoved == 0){
+                    if (cruRot == 0){
+                        cruRot = 1;
+
+                        document.getElementById("cruiser").style.height = "156px";
+                        document.getElementById("cruiser").style.width = "52px";
+
+                        document.getElementById("cruiser").style.background = image = "url('Cruiser_rotated.png')";
+                    }
+                    else {
+                        cruRot = 0;
+
+                        document.getElementById("cruiser").style.height = "52px";
+                        document.getElementById("cruiser").style.width = "156px";
+
+                        document.getElementById("cruiser").style.background = image = "url('Cruiser.png')";
+                    }
+                }
+            });
+            if(PlayerShip1.ship.checkIsAlive()){
+                
+                if (carRot == 0){
+
+                    document.getElementById("carrier").style.height = "260px";
+                    document.getElementById("carrier").style.width = "52px";
+
+                    document.getElementById("carrier").style.background = image = "url('Carrier_rotated.png')";
+                }
+                else {
+
+                    document.getElementById("carrier").style.height = "52px";
+                    document.getElementById("carrier").style.width = "260px";
+
+                    document.getElementById("carrier").style.background = image = "url('Carrier.png')";
+                }
+                
+            };
+        </script>
     </body>
 </html>

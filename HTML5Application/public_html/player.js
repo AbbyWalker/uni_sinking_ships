@@ -50,7 +50,7 @@ player.prototype = {
 
         PlayerShip1 = new ship('Carrier', 1);
         if(placeships.carRot == 0){
-            PlayerShip1.setLocations([[placeships.carX, placeships.carY, 0], [placeships.carX+1, placeships.carY, 0], [placeships.carX+2, placeships.carY+2, 0], [placeships.carX+3, placeships.carY, 0], [placeships.carX+4, placeships.carY, 0]]);
+            PlayerShip1.setLocations([[placeships.carX, placeships.carY, 0], [placeships.carX+1, placeships.carY, 0], [placeships.carX+2, placeships.carY, 0], [placeships.carX+3, placeships.carY, 0], [placeships.carX+4, placeships.carY, 0]]);
         }else{
             PlayerShip1.setLocations([[placeships.carX, placeships.carY, 0], [placeships.carX, placeships.carY+1, 0], [placeships.carX, placeships.carY+2, 0], [placeships.carX, placeships.carY+3, 0], [placeships.carX, placeships.carY+4, 0]]);
         }

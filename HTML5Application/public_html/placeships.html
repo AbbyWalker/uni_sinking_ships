@@ -29,16 +29,12 @@ and open the template in the editor.
             width: 520px;
             height: 520px;
             border: 5px solid black;
+            float: right;
         }
         #draggable {
             float:left;
             height: 52px;
             background-color: gray;
-        }
-        .row {
-            width: auto;
-            height: auto;
-            background: #313131;
         }
         .destroyer {
             height: 52px;
@@ -67,12 +63,18 @@ and open the template in the editor.
         }
         .mine1 {
             width: 52px;
+            height: 52px;
+            background-image:url('Mine.png');
         }
         .mine2 {
             width: 52px;
+            height: 52px;
+            background-image:url('Mine.png');
         }
         .mine3 {
             width: 52px;
+            height: 52px;
+            background-image:url('Mine.png');
         }
         .draggable p {
             text-align: center;
@@ -107,17 +109,9 @@ and open the template in the editor.
     <div class="draggable cruiser" id="cruiser"></div>
     <div class="draggable battleship" id="battleship"></div>
     <div class="draggable submarine" id="submarine"></div>
-    <div class="draggable mine1" id="mine1">
-        <p>Mine1</p>
-    </div>
-    <div class="draggable mine2" id="mine2">
-        <p>Mine2</p>
-    </div>
-    <div class="draggable mine3" id="mine3">
-        <p>Mine3</p>
-    </div>
-    
-    <button type="button" onclick="Sheild()">Use Shield?</button>
+    <div class="draggable mine1" id="mine1"></div>
+    <div class="draggable mine2" id="mine2"></div>
+    <div class="draggable mine3" id="mine3"></div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
@@ -408,13 +402,22 @@ and open the template in the editor.
 
         var shipsPos = {'mine1X' :mine1X, 'mine1Y': mine1Y, 'mine2X' : mine2X, 'mine2Y': mine2Y,'mine3X' : mine3X, 'mine3Y': mine3Y,'cruX' :cruX, 'cruY': cruY, 'cruRot': cruRot,'batX' : batX, 'batY': batY, 'batRot': batRot,'subX' : subX, 'subY': subY, 'subRot': subRot,'carX' : carX, 'carY': carY, 'carRot': carRot, 'desX' : desX, 'desY': desY, 'desRot': desRot}
         createCookie('shipLocation',JSON.stringify(shipsPos),100);
+        var shipsMoved = 0;
+        if (carMoved == 1 && subMoved == 1 && desMoved == 1 && batMoved == 1 && cruMoved ==1){
+            shipsMoved = 1;
+        }
     }
     getSettings();
    
     </script>
-    
-    <form action="index.html" method="get"> 
+
+    <form id = "formaction" action="index.html" method="get"> 
         <input type="Submit" value="Start" style="height:50px; width:200px"/>
     </form>
+    <script>
+        //if (shipsMoved == 1){
+          //  document.getElementById("formaction").action="index.html";        
+        //}
+    </script>
     </body>
 </html>
