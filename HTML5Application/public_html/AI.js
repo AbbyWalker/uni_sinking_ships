@@ -61,7 +61,6 @@ AI.prototype = {
         
     },
     makeComputerMoveEasy: function () {
-
         var move = AI.getRandMove();
         var coord = move.split(',').map(Number);
         var x = coord[0];
@@ -316,19 +315,19 @@ AI.prototype = {
         
         if (hitX==0) {
             hitX = hitX + 1;
-            console("1");
+
         }
         if (hitY == 0) {
             hitY = hitY + 1;
-            console("1");
+
         }
         if (hitX==(xLength-1)) {
             hitX = hitX - 1;
-            console("1");
+
         }
         if (hitY == (yLength-1)) {
             hitY = hitY -1;
-            console("1");
+
         }
         
         if (lastX!== hitX && lastY !== hitY || this.numOfMisses>= 2) {
@@ -689,7 +688,7 @@ AI.prototype = {
            
     },
 
-    getRandMove: function () { //selects random move from remainder of move list
+    getRandMove: function () {
         var rand = getRandFromArray(this.moveList);
         return rand;
     },

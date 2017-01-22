@@ -137,9 +137,20 @@ function makeAIMove() {
         gameWon = true;
     }
 
-}
+};
 
-;
+function AIthinkAndMove() {
+
+//Uses timeouts to make the move wait until after the thinking has finished, and to wait for sound effects to happen.
+    setTimeout(function () {
+        AI.think();
+    }, 2000);
+    setTimeout(function () {
+        makeAIMove();
+    }, 4300);
+
+};
+
 function restoreOnClick() {
 
 //iterates through each possible move that hasnt been made and reactivates the onclick function
