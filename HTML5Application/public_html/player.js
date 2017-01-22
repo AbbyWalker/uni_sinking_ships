@@ -12,8 +12,7 @@ function getCookie(name) {
         var placeships = JSON.parse(shipsPos);
         
 
-function player(name, xSize, ySize) {
-    this.name = name;
+function player(xSize, ySize) {
     this.moveList = this.buildMoveList(xSize, ySize);
     this.grid = new Grid(xSize, ySize);
     this.hitPlayer = [];
@@ -24,9 +23,7 @@ function player(name, xSize, ySize) {
 
 player.prototype = {
     constructor: player,
-    getName: function () {
-        return this.name;
-    },
+    
     makePlayerMove: function (move) {
         var moveCoord = move.substring(2);
         var coord = moveCoord.split(',').map(Number);

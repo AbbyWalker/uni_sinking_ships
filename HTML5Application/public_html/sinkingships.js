@@ -34,7 +34,7 @@ var userScore = playerShipsAlive();
 function startGame(xLength, yLength, difficulty, playerTurn) {
     //configures and starts the game
 
-    player = new player('Pete', xLength, yLength);
+    player = new player(xLength, yLength);
     AI = new AI(xLength, yLength, difficulty);
     player.definePlayerFleetMVP();
     player.drawInitialGrid(xLength, yLength);

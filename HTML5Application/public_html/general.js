@@ -15,8 +15,8 @@ var TIME_PAUSED = 0;
 var PAUSED_SEC = 0;
 var PAUSED = false;
 
-var hitNoise = new Audio('hitNoise.mp3');
-var missNoise = new Audio('missNoise.mp3');
+var hitNoise = new Audio('media/hitNoise.mp3');
+var missNoise = new Audio('media/missNoise.mp3');
 var userFleet = [];
 var compFleet = [];
 var gameWon = false;
